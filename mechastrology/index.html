@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Raimundo Freud Chatbot</title>
+     <style>
+        body{
+            color: #ffffff;
+            background-color: #000005;
+            border: 0px;
+            padding: 0px;
+        }
+        h1{
+            color: #ffd000;
+        }
+        .container {
+			font-family: arial, helvetica, sans-serif;
+            display: flex;
+			background-image: url('fundo_signos.jpg');
+			background-repeat: no-repeat;
+			background-size: 100%;
+			background-position: center;
+        }
+
+        .div1, .div2 {
+            width: 50%;
+            padding: 15px;
+        }
+
+        .div2 img {
+            width: 50%;
+            height: auto;
+        }
+		.balao{
+			width: 100%;
+            color: #ffffff;
+			background-color: rgba(5, 5, 5, 0.4);
+            padding: 10px;
+			border-radius: 5px;
+		}
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="div1">
+            <h1>Mechastrology</h1>
+            <div id="divForm" class="balao">
+                <form id="formData">
+                    <label for="birthdate">Quando você nasceu?</label><br>
+                    <input type="date" id="birthdate" name="birthdate"><br>
+                    <input type="submit" value="previsões para hoje">
+                </form>
+            </div>
+            <div id="divHoje" class="balao">               
+                <h2 id="ResSignoNome"></h2>
+                <p id="ResSignoDescreve"></p>
+            </div>
+        </div>
+        <div class="div2">
+            <div id="divIntro" class="balao">
+                <p>
+                    Bem-vindo ao Mechastrology, onde a sabedoria ancestral encontra a inovação moderna! Estamos aqui para oferecer previsões astrológicas gratuitas, entregando insights personalizados diretamente para você. No Mechastrology, acreditamos que todos merecem acesso fácil e rápido às orientações celestiais que moldam nossos destinos.<br/>
+                    Imagine a fusão perfeita entre tradição e tecnologia: é isso que oferecemos. Ao automatizar a astrologia, proporcionamos uma experiência celestial intuitiva, tornando as complexidades do zodíaco acessíveis a todos, independentemente do nível de familiaridade com a astrologia.<br/>
+                    A automação não apenas simplifica o processo, mas também permite uma análise astrológica instantânea e precisa. Nosso sistema é projetado para interpretar os alinhamentos planetários de forma aprofundada, fornecendo previsões que são tão únicas quanto a sua própria jornada. No Mechastrology, não se trata apenas de previsões, mas sim de oferecer uma bússola celeste que orienta você em meio às suas escolhas diárias.<br/>
+                    Ao automatizar a astrologia, tornamos as estrelas mais acessíveis, permitindo que você compreenda e aproveite ao máximo as influências cósmicas em sua vida. Descubra o seu destino com o Mechastrology - porque a orientação celestial nunca foi tão fácil, precisa e, o melhor de tudo, gratuita!<br/>
+                </p>
+            </div>
+            <div id="divSigno" class="balao">
+                    <h2>PARA HOJE:</h2>
+                    <p id="RespDicaEntrada"></p>
+                    <p id="RespDicaHoje"></p>
+                    <p id="RespDicaDia"></p>
+            </div>        
+        </div>
+    </div>
+    
+ <script>
+
+    var frazes1 = [
+        "Desafios são apenas oportunidades disfarçadas. ",
+        "Mostre ao mundo a sua força. ",
+        "A persistência é a chave do sucesso. ",
+        "Confie no seu ritmo constante e conquiste seus objetivos. ",
+        "Sua mente é uma ferramenta poderosa. Use-a para criar e inovar. ",
+        "O mundo está esperando por suas ideias brilhantes. ",
+        "Seu coração compassivo é a sua maior força. ",
+        "Ilumine o mundo com seu amor e empatia. ",
+        "Brilhe como a estrela que você é. ", 
+        "O palco da vida está pronto para a sua performance extraordinária.",
+        "A atenção aos detalhes é sua superpotência. ",
+        "Seja meticuloso em suas ações e alcance a perfeição. ",
+        "Equilíbrio é a chave da harmonia. ",
+        "Encontre o centro dentro de você e conquiste o equilíbrio em todas as áreas da sua vida. ",
+        "Sua intensidade é sua maior virtude. ",
+        "Use-a para transformar desafios em triunfos e alcançar profundidades extraordinárias.",
+        "Aventure-se além das fronteiras.",
+        "Seu espírito livre é a bússola que guiará você para conquistas grandiosas.",
+        "Ambição e disciplina são suas aliadas",
+        "Erga-se com determinação, pois o topo da montanha aguarda a sua chegada.",
+        "Inove e inspire. O mundo precisa da sua visão futurista para criar um amanhã extraordinário.",
+        "Siga a corrente dos seus sonhos.",
+        "Seu mundo de imaginação é a chave para criar magia e beleza ao seu redor.",     
+        "Cultive resiliência.",
+        "Veja desafios como oportunidades de crescimento.",
+        "Aprenda a se recuperar de adversidades.",
+        "Promova a sustentabilidade.",
+        "Esteja consciente do impacto ambiental de suas escolhas.",
+        "Viva o presente. Pratique a atenção plena e esteja presente no momento.",
+        "Não se sobrecarregue com preocupações sobre o passado ou o futuro.",
+        "Adote práticas ecológicas no dia a dia."
+    ]
+
+       
+
+    const frazesMes = [
+        {
+            "entrada":" Priorize a saúde mental e emocional: ",
+            "complemento1":"Cuide de suas emoções e pratique a autorreflexão.",
+            "complemento2":"Busque apoio quando necessário e não hesite em pedir ajuda."
+        },
+        {
+            "entrada":" Cultive relacionamentos saudáveis: ",
+            "complemento1":"Valorize as relações pessoais.",
+            "complemento2":"Comunique-se de forma aberta e ouça atentamente."
+        },
+         {
+            "entrada":" Aprenda a administrar o estresse: ",
+            "complemento1":"Desenvolva estratégias de enfrentamento.",
+            "complemento2":"Reserve tempo para relaxar e recarregar."
+        },
+        {
+            "entrada":" Busque o equilíbrio: ",
+            "complemento1":"Mantenha um equilíbrio saudável entre trabalho, lazer e descanso.",
+            "complemento2":"Evite extremos e busque moderação."
+        },
+        {
+            "entrada":" Invista em aprendizado contínuo: ",
+            "complemento1":"Mantenha-se curioso e aberto a novas experiências.",
+            "complemento2":"Esteja disposto a aprender com sucessos e falhas."
+        },
+        {
+            "entrada":" Seja grato: ",
+            "complemento1":"Pratique a gratidão diariamente.",
+            "complemento2":"Reconheça as coisas boas em sua vida."
+        },
+        {
+            "entrada":"Defina metas realistas: ",
+            "complemento1":"Estabeleça metas alcançáveis e mensuráveis.",
+            "complemento2":"Divida objetivos grandes em tarefas menores e mais gerenciáveis."
+        },
+        {
+            "entrada":"Adote uma mentalidade positiva: ",
+            "complemento1":"Enfrente desafios com otimismo.",
+            "complemento2":"Transforme obstáculos em oportunidades de crescimento."
+        },
+        {
+            "entrada":"Cuide do seu bem-estar físico: ",
+            "complemento1":"Mantenha uma alimentação equilibrada.",
+            "complemento2":"Pratique exercícios regularmente e cuide do seu sono."
+        },
+        {
+            "entrada":"Seja gentil consigo mesmo e com os outros: ",
+            "complemento1":"Aceite suas imperfeições e aprenda com elas.",
+            "complemento2":"Cultive a empatia e compaixão em seus relacionamentos."
+        },
+        {
+            "entrada":"Gerencie seu tempo eficientemente: ",
+            "complemento1":"Priorize tarefas e evite procrastinação.",
+            "complemento2":"Aprenda a dizer não quando necessário."
+        },
+        {
+            "entrada":"Crie momentos de lazer: ",
+            "complemento1":"Reserve tempo para atividades que trazem alegria e relaxamento.",
+            "complemento2":"Desconecte-se digitalmente de vez em quando."
+        }
+    ]
+
+    function getDicaDoDia(mes, dia) {
+        mes = parseInt(mes-1,10);
+        dia = parseInt(dia,10);
+        console.log("getDicaDoDia(mes="+mes+", dia="+dia+")");
+        var strDicaDoDia = {"entrada":frazesMes[mes].entrada, "complemento":"","fraze":frazes1[dia]}     
+        if (dia<15){
+            strDicaDoDia.complemento = frazesMes[mes].complemento1    
+        }else{
+            strDicaDoDia.strDicaDoDia = frazesMes[mes].complemento1
+        }
+        return strDicaDoDia
+    }
+
+    function getZodiacSign(month, day) {
+        month = parseInt(month,10)
+        day = parseInt(day,10)
+        if ((month == 1 && day >= 20) || (month == 2 && day <= 18)) {
+            return {
+                "nome": "Aquário",
+                "planeta": "Urano",
+                "deus": "Urano",
+                "anjo": "Uriel",
+                "periodo" : "20 de janeiro a 18 de fevereiro"}
+        }else if ((month == 2 && day >= 19) || (month == 3 && day <= 20)) {
+            return {
+                "nome": "Peixes",
+                "planeta": "Netuno",
+                "deus": "Poseidon",
+                "anjo": "Asariel",
+                "periodo" : "19 de fevereiro a 20 de março"}
+        }else if ((month == 3 && day >= 21) || (month == 4 && day <= 19)) {
+            return {
+                "nome": "Áries",
+                "planeta": "Marte",
+                "deus": "Ares",
+                "anjo": "Samuel",
+                "periodo" : "21 de março a 19 de abril"}
+        } else if ((month == 4 && day >= 20) || (month == 5 && day <= 20)) { 
+            return {	
+                "nome": "Touro",
+                "planeta": "Vênus",
+                "deus": "Dionísio",
+                "anjo": "Anael",
+                "periodo" : "20 de abril a 20 de maio"}
+        } else if ((month == 5 && day >= 21) || (month == 6 && day <= 20)) {
+            return {       
+                "nome": "Gêmeos",
+                "planeta": "Mercúrio",
+                "deus": "Hermes",
+                "anjo": "Rafael",
+                "periodo" : "21 de maio a 20 de junho"}
+        } else if ((month == 6 && day >= 21) || (month == 7 && day <= 22)) {
+            return {       
+                "nome": "Câncer",
+                "planeta": "Lua",
+                "deus": "Selene",
+                "anjo": "Gabriel",
+                "periodo" : "21 de junho a 22 de julho"}
+        } else if ((month == 7 && day >= 21) || (month == 8 && day <= 22)) {
+            return {       
+                "nome": "Leão",
+                "planeta": "Sol",
+                "deus": "Apolo",
+                "anjo": "Miguel",
+                "periodo" : "23 de julho a 22 de agosto"}
+        } else if ((month == 8 && day >= 23) || (month == 9 && day <= 22)) {
+            return {       
+                "nome": "Virgem",
+                "planeta": "Mercúrio",
+                "deus": "Deméter",
+                "anjo": "Camael",
+                "periodo" : "23 de agosto a 22 de setembro"}
+        } else if ((month == 9 && day >= 23) || (month == 10 && day <= 22)) {
+            return { 
+                "nome": "Libra",
+                "planeta": "Vênus",
+                "deus": "Afrodite",
+                "anjo": "Haniel",
+                "periodo" : "23 de setembro a 22 de outubro"}
+        } else if ((month == 10 && day >= 23) || (month == 11 && day <= 21)) {
+            return {
+                "nome": "Escorpião",
+                "planeta": "Plutão",
+                "deus": "Hades",
+                "anjo": "Azrael",
+                "periodo" : "23 de outubro a 21 de novembro"}
+        } else if ((month == 11 && day >= 22) || (month == 12 && day <= 21)) {
+            return {
+                "nome": "Sagitário",
+                "planeta": "Júpiter",
+                "deus": "Zeus",
+                "anjo": "Saquiel",
+                "periodo" : "22 de novembro a 21 de dezembro"}
+        } else {
+            return {
+                "nome": "Capricórnio",
+                "planeta": "Saturno",
+                "deus": "Cronos",
+                "anjo": "Cassiel",
+                "periodo" : "22 de dezembro a 19 de janeiro"
+            }
+        }
+    }
+
+    console.log(getZodiacSign(4, 19)); // Retorna: Touro
+
+    document.getElementById('formData').addEventListener('submit', function(event) {
+        event.preventDefault(); // Previne o envio do formulário
+
+        const userInput = document.getElementById('birthdate').value;
+        const dataArray = userInput.split("-");
+        console.log(dataArray);
+        
+        // ----- Data de hoje ------------------
+        let date = new Date(); // create a new Date object with the current date and time
+        let day = parseInt(date.getDate().toString().slice(0, 2), 10); // get the day of the month and format it with leading zero if necessary
+        let month = parseInt((date.getMonth() + 1).toString().slice(0, 2), 10); // get the month and add 1 to it since getMonth() returns a value from 0 to 11, then format it with leading zero if necessary
+        
+        console.log(`Hoje Day: ${day}, Month: ${month}`);
+        console.log("Data: " + userInput + ". Ano "+ dataArray[0] + ", Mês "+dataArray[1] + ", dia "+dataArray[2]+".")
+
+        const responseSigno = getZodiacSign(dataArray[1], dataArray[2]);
+        const responseDicas = getDicaDoDia((month+parseInt(dataArray[1],10))/2, (day+parseInt(dataArray[2],10))/2)
+        
+        document.getElementById('divForm').style.display = 'none'; // hide .visible = false
+        document.getElementById('divIntro').style.display = 'none'; // hide .visible = false
+
+        document.getElementById('divHoje').style.display = 'block'; // show .visible = true
+        document.getElementById('divSigno').style.display = 'block'; // show .visible = true
+
+
+        document.getElementById('ResSignoNome').textContent = responseSigno.nome
+        document.getElementById('ResSignoDescreve').textContent = "Seu signo é o " + responseSigno.nome +", planeta "+ responseSigno.planeta + ", representado pelo deus "+ responseSigno.deus + " protegido pelo anjo " + responseSigno.anjo + ". Nascidos entre " + responseSigno.periodo + " são de " + responseSigno.nome + "."
+
+        document.getElementById('RespDicaEntrada').textContent = responseDicas.entrada
+        document.getElementById('RespDicaHoje').textContent = responseDicas.complemento
+        document.getElementById('RespDicaDia').textContent = responseDicas.fraze
+    });
+
+    document.getElementById('ResSignoNome').textContent = "Qual é o seu signo?";
+    document.getElementById('ResSignoDescreve').textContent = "Aqui aparecerá informações do seu signo.";
+
+    document.getElementById('RespDicaEntrada').textContent = "Aqui aparecerá";
+    document.getElementById('RespDicaHoje').textContent = "as previsões para";
+    document.getElementById('RespDicaDia').textContent = "hoje.";
+
+    document.getElementById('divHoje').style.display = 'none'; // hide
+    document.getElementById('divSigno').style.display = 'none'; // hide
+
+ </script>
+</body>
+</html>
