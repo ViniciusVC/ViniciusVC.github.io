@@ -14,13 +14,15 @@
         h1{
             color: #ffd000;
         }
-        .container {
-			font-family: arial, helvetica, sans-serif;
-            display: flex;
-			background-image: url('fundo_signos.jpg');
+        .containerMechastrology{
+            font-family: arial, helvetica, sans-serif;
+            background-image: url('fundo_signos.jpg');
 			background-repeat: no-repeat;
 			background-size: 100%;
 			background-position: center;
+        }
+        .container {
+            display: flex;
         }
 
         .div1, .div2 {
@@ -42,31 +44,35 @@
     </style>
 </head>
 <body>
-
+    <div class="containerMechastrology">
+    <h1>Mechastrology</h1>
+    <div id="divForm">
+        <div id="divForm" class="balao">
+            <form id="formData">
+                <label for="birthdate">Quando você nasceu?</label><br>
+                <input type="date" id="birthdate" name="birthdate"><br>
+                <input type="submit" value="previsões para hoje">
+            </form>
+        </div>
+        <br/>
+        <div id="divIntro" class="balao">
+            <p>
+                Bem-vindo ao Mechastrology, onde a sabedoria ancestral encontra a inovação moderna! Estamos aqui para oferecer previsões astrológicas gratuitas, entregando insights personalizados diretamente para você. No Mechastrology, acreditamos que todos merecem acesso fácil e rápido às orientações celestiais que moldam nossos destinos.<br/>
+                Imagine a fusão perfeita entre tradição e tecnologia: é isso que oferecemos. Ao automatizar a astrologia, proporcionamos uma experiência celestial intuitiva, tornando as complexidades do zodíaco acessíveis a todos, independentemente do nível de familiaridade com a astrologia.<br/>
+                A automação não apenas simplifica o processo, mas também permite uma análise astrológica instantânea e precisa. Nosso sistema é projetado para interpretar os alinhamentos planetários de forma aprofundada, fornecendo previsões que são tão únicas quanto a sua própria jornada. No Mechastrology, não se trata apenas de previsões, mas sim de oferecer uma bússola celeste que orienta você em meio às suas escolhas diárias.<br/>
+                Ao automatizar a astrologia, tornamos as estrelas mais acessíveis, permitindo que você compreenda e aproveite ao máximo as influências cósmicas em sua vida. Descubra o seu destino com o Mechastrology - porque a orientação celestial nunca foi tão fácil, precisa e, o melhor de tudo, gratuita!<br/>
+            </p>
+        </div>
+    </div>
     <div class="container">
-        <div class="div1">
-            <h1>Mechastrology</h1>
-            <div id="divForm" class="balao">
-                <form id="formData">
-                    <label for="birthdate">Quando você nasceu?</label><br>
-                    <input type="date" id="birthdate" name="birthdate"><br>
-                    <input type="submit" value="previsões para hoje">
-                </form>
-            </div>
+        <div class="div1">  
             <div id="divHoje" class="balao">               
                 <h2 id="ResSignoNome"></h2>
                 <p id="ResSignoDescreve"></p>
             </div>
         </div>
         <div class="div2">
-            <div id="divIntro" class="balao">
-                <p>
-                    Bem-vindo ao Mechastrology, onde a sabedoria ancestral encontra a inovação moderna! Estamos aqui para oferecer previsões astrológicas gratuitas, entregando insights personalizados diretamente para você. No Mechastrology, acreditamos que todos merecem acesso fácil e rápido às orientações celestiais que moldam nossos destinos.<br/>
-                    Imagine a fusão perfeita entre tradição e tecnologia: é isso que oferecemos. Ao automatizar a astrologia, proporcionamos uma experiência celestial intuitiva, tornando as complexidades do zodíaco acessíveis a todos, independentemente do nível de familiaridade com a astrologia.<br/>
-                    A automação não apenas simplifica o processo, mas também permite uma análise astrológica instantânea e precisa. Nosso sistema é projetado para interpretar os alinhamentos planetários de forma aprofundada, fornecendo previsões que são tão únicas quanto a sua própria jornada. No Mechastrology, não se trata apenas de previsões, mas sim de oferecer uma bússola celeste que orienta você em meio às suas escolhas diárias.<br/>
-                    Ao automatizar a astrologia, tornamos as estrelas mais acessíveis, permitindo que você compreenda e aproveite ao máximo as influências cósmicas em sua vida. Descubra o seu destino com o Mechastrology - porque a orientação celestial nunca foi tão fácil, precisa e, o melhor de tudo, gratuita!<br/>
-                </p>
-            </div>
+
             <div id="divSigno" class="balao">
                     <h2>PARA HOJE:</h2>
                     <p id="RespDicaEntrada"></p>
@@ -75,7 +81,7 @@
             </div>        
         </div>
     </div>
-    
+    </div>
  <script>
 
     var frazes1 = [
@@ -196,6 +202,7 @@
         if ((month == 1 && day >= 20) || (month == 2 && day <= 18)) {
             return {
                 "nome": "Aquário",
+                "elemento": "ar",
                 "planeta": "Urano",
                 "deus": "Urano",
                 "anjo": "Uriel",
@@ -203,6 +210,7 @@
         }else if ((month == 2 && day >= 19) || (month == 3 && day <= 20)) {
             return {
                 "nome": "Peixes",
+                "elemento": "água",
                 "planeta": "Netuno",
                 "deus": "Poseidon",
                 "anjo": "Asariel",
@@ -210,6 +218,7 @@
         }else if ((month == 3 && day >= 21) || (month == 4 && day <= 19)) {
             return {
                 "nome": "Áries",
+                "elemento": "fogo",
                 "planeta": "Marte",
                 "deus": "Ares",
                 "anjo": "Samuel",
@@ -217,6 +226,7 @@
         } else if ((month == 4 && day >= 20) || (month == 5 && day <= 20)) { 
             return {	
                 "nome": "Touro",
+                "elemento": "terra",
                 "planeta": "Vênus",
                 "deus": "Dionísio",
                 "anjo": "Anael",
@@ -224,6 +234,7 @@
         } else if ((month == 5 && day >= 21) || (month == 6 && day <= 20)) {
             return {       
                 "nome": "Gêmeos",
+                "elemento": "ar",
                 "planeta": "Mercúrio",
                 "deus": "Hermes",
                 "anjo": "Rafael",
@@ -231,6 +242,7 @@
         } else if ((month == 6 && day >= 21) || (month == 7 && day <= 22)) {
             return {       
                 "nome": "Câncer",
+                "elemento": "água",
                 "planeta": "Lua",
                 "deus": "Selene",
                 "anjo": "Gabriel",
@@ -238,6 +250,7 @@
         } else if ((month == 7 && day >= 21) || (month == 8 && day <= 22)) {
             return {       
                 "nome": "Leão",
+                "elemento": "fogo",
                 "planeta": "Sol",
                 "deus": "Apolo",
                 "anjo": "Miguel",
@@ -245,6 +258,7 @@
         } else if ((month == 8 && day >= 23) || (month == 9 && day <= 22)) {
             return {       
                 "nome": "Virgem",
+                "elemento": "terra",
                 "planeta": "Mercúrio",
                 "deus": "Deméter",
                 "anjo": "Camael",
@@ -252,6 +266,7 @@
         } else if ((month == 9 && day >= 23) || (month == 10 && day <= 22)) {
             return { 
                 "nome": "Libra",
+                "elemento": "ar",
                 "planeta": "Vênus",
                 "deus": "Afrodite",
                 "anjo": "Haniel",
@@ -259,6 +274,7 @@
         } else if ((month == 10 && day >= 23) || (month == 11 && day <= 21)) {
             return {
                 "nome": "Escorpião",
+                "elemento": "água",
                 "planeta": "Plutão",
                 "deus": "Hades",
                 "anjo": "Azrael",
@@ -266,6 +282,7 @@
         } else if ((month == 11 && day >= 22) || (month == 12 && day <= 21)) {
             return {
                 "nome": "Sagitário",
+                "elemento": "fogo",
                 "planeta": "Júpiter",
                 "deus": "Zeus",
                 "anjo": "Saquiel",
@@ -273,6 +290,7 @@
         } else {
             return {
                 "nome": "Capricórnio",
+                "elemento": "terra",
                 "planeta": "Saturno",
                 "deus": "Cronos",
                 "anjo": "Cassiel",
@@ -309,7 +327,7 @@
 
 
         document.getElementById('ResSignoNome').textContent = responseSigno.nome
-        document.getElementById('ResSignoDescreve').textContent = "Seu signo é o " + responseSigno.nome +", planeta "+ responseSigno.planeta + ", representado pelo deus "+ responseSigno.deus + " protegido pelo anjo " + responseSigno.anjo + ". Nascidos entre " + responseSigno.periodo + " são de " + responseSigno.nome + "."
+        document.getElementById('ResSignoDescreve').textContent = "Seu signo é o " + responseSigno.nome +", planeta "+ responseSigno.planeta + ", representado pelo deus "+ responseSigno.deus + " protegido pelo anjo " + responseSigno.anjo + ", é um signo do elemento " + responseSigno.elemento + ". Os nascidos entre " + responseSigno.periodo + " são de " + responseSigno.nome + "."
 
         document.getElementById('RespDicaEntrada').textContent = responseDicas.entrada
         document.getElementById('RespDicaHoje').textContent = responseDicas.complemento
