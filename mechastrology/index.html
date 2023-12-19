@@ -3,7 +3,7 @@
 <head>
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>Raimundo Freud Chatbot</title>
+ <title>Signos</title>
      <style>
         body{
             color: #ffffff;
@@ -78,6 +78,9 @@
                     <p id="RespDicaEntrada"></p>
                     <p id="RespDicaHoje"></p>
                     <p id="RespDicaDia"></p>
+                    <p id="RespDicaCuidado"></p>
+                    <p id="RespDicaHoje2"></p>
+                    
             </div>        
         </div>
     </div>
@@ -183,16 +186,81 @@
         }
     ]
 
+    const frazesCuidado = [
+        {
+            "entrada":" Lidar com a Ansiedade: ",
+            "complemento1":"Pratique técnicas de respiração profunda para acalmar a mente. ",
+            "complemento2":"Identifique pensamentos negativos e questione sua validade."
+        },
+        {
+            "entrada":" Mas cuidado com enfrentar o Estresse Financeiro: ",
+            "complemento1":"Faça um orçamento claro e realista. ",
+            "complemento2":"Busque orientação profissional se estiver enfrentando dificuldades financeiras."
+        },
+        {
+            "entrada":" Mas cuidado com Superar a Solidão: ",
+            "complemento1":"Conecte-se com amigos e familiares. ",
+            "complemento2":"Participe de atividades sociais ou grupos de interesse."
+        },
+        {
+            "entrada":" Mas cuidado com Enfrentar Desafios Profissionais: ",
+            "complemento1":"Desenvolva habilidades de resolução de problemas. ",
+            "complemento2":"Considere buscar orientação profissional ou treinamento adicional."
+        },
+        {
+            "entrada":" Mas cuidado com Lidar com a Perda: ",
+            "complemento1":"Dê a si mesmo tempo para lamentar e aceitar as emoções. ",
+            "complemento2":"Busque apoio de amigos, familiares ou profissionais de saúde mental."
+        },
+        {
+            "entrada":" Mas cuidado com Melhorar Relacionamentos: ",
+            "complemento1":"Comunique-se abertamente sobre suas necessidades e preocupações. ",
+            "complemento2":"Pratique a empatia e compreenda as perspectivas dos outros."
+        },
+        {
+            "entrada":" Mas cuidado com Enfrentar Problemas de Saúde: ",
+            "complemento1":"Priorize hábitos de vida saudáveis. ",
+            "complemento2":"Consulte profissionais de saúde para aconselhamento e tratamento."
+        },
+        {
+            "entrada":" Mas cuidado com Lidar com Mudanças Drásticas: ",
+            "complemento1":"Aceite que a mudança é uma constante na vida. ",
+            "complemento2":"Desenvolva resiliência e ajuste gradualmente à nova situação."
+        },
+        {
+            "entrada":" Mas cuidado com Enfrentar Dificuldades Relacionadas ao Trabalho: ",
+            "complemento1":"Comunique-se efetivamente com colegas e superiores. ",
+            "complemento2":"Defina limites saudáveis entre trabalho e vida pessoal."
+        },
+        {
+            "entrada":" Mas cuidado com Cuidar da Saúde Mental: ",
+            "complemento1":"Busque apoio profissional se estiver enfrentando desafios emocionais. ",
+            "complemento2":"Pratique o autocuidado regularmente."
+        },
+        {
+            "entrada":" Mas cuidado com Gerenciar Conflitos Familiares: ",
+            "complemento1":"Estabeleça comunicação aberta e honesta. ",
+            "complemento2":"Considere a terapia familiar para resolver conflitos."
+        },
+        {
+            "entrada":" Mas cuidado com navegar por Relacionamentos Tóxicos: ",
+            "complemento1":"Estabeleça limites claros e saudáveis. ",
+            "complemento2":"Considere buscar ajuda de amigos, familiares ou profissionais."
+        }
+    ]
+
     function getDicaDoDia(mes, dia) {
         mes = parseInt(mes-1,10);
         dia = parseInt(dia,10);
         console.log("getDicaDoDia(mes="+mes+", dia="+dia+")");
-        var strDicaDoDia = {"entrada":frazesMes[mes].entrada, "complemento":"","fraze":frazes1[dia]}     
+        var strDicaDoDia = {"entrada":frazesMes[mes].entrada, "cuidado":frazesCuidado[mes].entrada, "complemento":"", "complemento2":"","fraze":frazes1[dia]}     
         if (dia<15){
-            strDicaDoDia.complemento = frazesMes[mes].complemento1    
+            strDicaDoDia.complemento = frazesMes[mes].complemento1
+            strDicaDoDia.complemento2 = frazesCuidado[mes].complemento1 
         }else{
-            strDicaDoDia.strDicaDoDia = frazesMes[mes].complemento1
-        }
+            strDicaDoDia.strDicaDoDia = frazesMes[mes].complemento2
+            strDicaDoDia.strDicaDoDia2 = frazesCuidado[mes].complemento2
+        }     
         return strDicaDoDia
     }
 
@@ -332,6 +400,9 @@
         document.getElementById('RespDicaEntrada').textContent = responseDicas.entrada
         document.getElementById('RespDicaHoje').textContent = responseDicas.complemento
         document.getElementById('RespDicaDia').textContent = responseDicas.fraze
+        document.getElementById('RespDicaCuidado').textContent = responseDicas.cuidado
+        document.getElementById('RespDicaHoje2').textContent = responseDicas.complemento2
+
     });
 
     document.getElementById('ResSignoNome').textContent = "Qual é o seu signo?";

@@ -1,0 +1,362 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Star-Intruder</title>
+ <style>
+	   canvas {
+		 border: 1px solid black;
+	   }
+ </style>
+</head>
+<body>
+  <Div >
+    <canvas id="gameCanvas" width="400" height="400"></canvas>
+  </div>
+</body>
+score : <span id="spanscore"></span> <br/>
+debug : <span id="spandebug"></span> 
+<script>
+
+const spanscore = document.getElementById('spanscore');
+const spandebug = document.getElementById('spandebug');
+
+const canvas = document.getElementById('gameCanvas'); // instanciar canvas
+const ctx = canvas.getContext('2d'); // contexto 2D
+
+//--Criar-um-novo-elemento-de-canvas-offscreen-----------------------------
+//const canvas = document.createElement('gameCanvas');
+//canvas.width = canvas.width;
+//canvas.height = canvas.height;
+//const offscreenCtx = canvas.getContext('2d');
+
+//--Carregar imagens----------------------------------
+const playerImage = new Image();
+playerImage.src = 'star_intruder_play.png';
+const aliensImage = new Image();
+aliensImage.src = 'aliens.png';
+const aliensImage2 = new Image();
+aliensImage2.src = 'aliens2.png';
+
+const wallpaper = new Image();
+wallpaper.src = 'star_intruder_fundo.jpg';
+const tiropng = new Image();
+tiropng.src = 'star_intruder_tiro.png';
+const logo = new Image();
+logo.src = 'star_intruder_logo.png';
+
+let score = 0;
+let artilharia=1;
+
+//--Incluir-jogador-------------------------------------------- 
+const player = {
+  x: canvas.width / 2,
+  y: canvas.height - 50,
+  size: 50,
+  speed: 6, // velocidade do player
+  draw: function() {
+    drawImage(playerImage, this.x, this.y, this.size, this.size);
+ },
+};
+
+function zeraraVariaveis(){
+  //gameOver = true;
+  drawImage(logo, 10, 10, 200, 200);
+  alert('Game Over');
+  score = 0;
+  artilharia=1;
+  iniciado=false;
+
+  //zerar player
+  player.x = canvas.width / 2
+  player.y = canvas.height - 50
+  
+  //Zerar aliens
+  for (let i = 0; i < 5; i++) {
+    aliens[i].y = -40
+    aliens[i].speed = 1 // velocidade do inimigoww
+    aliens[i].direction = 'down'
+
+  }
+  //zerar tiros
+  for (let i = 0; i < bullets.length; i++) {
+      bullets.splice(i, 1);
+  }
+  //gameOver = false;
+  
+  updateGame();
+}
+
+function funInitGame(){
+    //gameOver = false;
+    iniciado=true
+    drawImage(logo, 10, 10, canvas.width/2, canvas.height/4);
+
+    spandebug.innerText = "iniciando";
+    //zeraraVariaveis()
+    //alert('iniciar game');
+    setTimeout(() => updateGame(), 800)
+}
+
+//--Incluir-Aliens-------------------------------------------------
+const aliens = []; // Varios aliens
+
+function initAliens(){
+  for (let i = 0; i < 5; i++) {
+    var alien = {
+      x: i * 80 + 20,
+      y: -40,
+      size: 60, // Tamnho do inimigo
+      speed: 1, // velocidade do inimigoww
+      direction: 'down',
+      draw: function(modeloAlien) {
+        if(modeloAlien==1){
+          drawImage(aliensImage, this.x, this.y, this.size, this.size);
+        }else{
+          drawImage(aliensImage2, this.x, this.y, this.size, this.size);
+        }
+        
+        //ctx.fillStyle = 'green'; // Cor dos inimigos
+        //ctx.fillRect(this.x, this.y, this.size, this.size); // posião e tamanho dos inimios
+      },
+    };
+    aliens.push(alien);
+  }
+}
+
+// Incluindo-tiro-------------------------------------------------
+const bullets = []; // Array para varios tiros
+function fireBullet() {
+ const bullet = {
+    x: player.x + player.size / 2 - 3,
+    y: player.y,
+    size: 5, // Tamanho da bala
+    speed: 8, // Velocidade da bala
+    draw: function() {
+      drawImage(tiropng, this.x, this.y, this.size, this.size);
+      //ctx.fillStyle = 'red';
+      //ctx.fillRect(this.x, this.y, this.size, this.size);
+    },
+ };
+ bullets.push(bullet);
+}
+
+function fireBullet2() {
+ const bullet = {
+    x: player.x + player.size / 2 - 20,
+    y: player.y,
+    size: 40, // Tamanho da bala
+    speed: 15, // Velocidade da bala
+    draw: function() {
+      drawImage(tiropng, this.x, this.y, this.size, this.size);
+      //ctx.fillStyle = 'red';
+      //ctx.fillRect(this.x, this.y, this.size, this.size);
+    },
+ };
+ bullets.push(bullet);
+}
+
+function fireBullet3() {
+  for (let i = 0; i < 3; i++) {
+    let tempx = -70 + i*60
+    const bullet = {
+        x: player.x + player.size / 2 + tempx,
+        y: player.y,
+        size: 20, // Tamanho da bala
+        speed: 15, // Velocidade da bala
+        draw: function() {
+          drawImage(tiropng, this.x, this.y, this.size, this.size);
+          //ctx.fillStyle = 'red';
+          //ctx.fillRect(this.x, this.y, this.size, this.size);
+        },
+    };
+    bullets.push(bullet);
+  }
+}
+
+
+function fireBullet4() {
+  for (let i = 0; i < 5; i++) {
+    let tempx = -140 + i*60
+    const bullet = {
+        x: player.x + player.size / 2 + tempx,
+        y: player.y,
+        size: 20, // Tamanho da bala
+        speed: 15, // Velocidade da bala
+        draw: function() {
+          drawImage(tiropng, this.x, this.y, this.size, this.size);
+          //ctx.fillStyle = 'red';
+          //ctx.fillRect(this.x, this.y, this.size, this.size);
+        },
+    };
+    bullets.push(bullet);
+  }
+}
+
+
+//-Incluir-imagem-ao-canvas------------------------
+function drawImage(img, x, y, width, height) {
+ ctx.drawImage(img, x, y, width, height);
+}
+
+totalAliens = 5
+let iniciado=false;
+
+function updateGame() {
+  
+  drawImage(wallpaper, 0, 0, canvas.width, canvas.height);
+  player.draw(); // desenhar jogador
+
+  if(iniciado==false){
+    funInitGame();
+  }else{
+    
+    
+    if(atirando==6){
+      if(artilharia==2){
+        fireBullet2();
+      }else if(artilharia==3){
+        fireBullet3();
+      }else if(artilharia==4){
+        fireBullet4();
+      }else{
+        fireBullet();
+      }
+    }
+    if(atirando>0){
+      atirando--; 
+    }
+
+
+    //ctx.clearRect(0, 0, canvas.width, canvas.height); // Limpa tela
+    //offscreenCtx.clearRect(0, 0, offscreenCanvas.width, offscreenCanvas.height);  
+
+    let stgDebug = " "
+    for (let i = 0; i < aliens.length; i++) {
+        stgDebug = stgDebug + " ["+i+"]:" + aliens[i].speed
+        if(aliens[i].speed>5){
+          aliens[i].draw(2); // Desenhar inimigo
+        }else{
+          aliens[i].draw(1); // Desenhar inimigo
+        }
+        
+
+        //if (aliens[i].direction === 'down') {
+        aliens[i].y += aliens[i].speed; // Aumentar velocidade
+        //}
+
+        if (aliens[i].y >= canvas.height - 30) {
+          zeraraVariaveis()
+          return;
+        }
+    }
+    spandebug.innerText = stgDebug + " - height:" + canvas.height;
+    checkCollisions();
+    removeOffscreenBullets();
+    for (let i = 0; i < bullets.length; i++) {
+        bullets[i].y -= bullets[i].speed;
+        bullets[i].draw(); // Desenhar bala
+    }
+    //requestAnimationFrame(updateGame);
+    setTimeout(() => updateGame(), 100)
+  }
+}
+
+//--Remover-tiros-nao-utilizados----------------------------
+function removeOffscreenBullets() {
+ for (let i = 0; i < bullets.length; i++) {
+    if (bullets[i].y < 0) {
+      bullets.splice(i, 1);
+    }
+ }
+}
+
+
+//--Verificando-colisao---------------------------------------
+function checkCollisions() {
+ for (let i = 0; i < bullets.length; i++) {
+    for (let j = 0; j < aliens.length; j++) {
+
+      if(bullets[i].x+bullets[i].size > aliens[j].x &&
+      bullets[i].x < aliens[j].x+aliens[j].size &&
+      bullets[i].y+bullets[i].size > aliens[j].y &&
+      bullets[i].y < aliens[j].y+aliens[j].size){
+         //tocou
+
+      /*
+      if (
+        bullets[i].x > aliens[j].x &&
+        bullets[i].x  < aliens[j].x + aliens[j].size &&
+        bullets[i].y > aliens[j].y &&
+        bullets[i].y < aliens[j].y + aliens[j].size
+      ) {
+      */
+      
+        score = score+aliens[j].speed;
+        spanscore.innerText = score;
+        if(score>200){
+          artilharia=4;
+        }else if(score>50){
+          artilharia=3;
+        }else if(score>10){
+          artilharia=2;
+        }
+        aliens[j].y = -1*aliens[j].size
+        if(aliens[j].speed>10 && score<3000){
+          aliens[j].speed = 5
+        }else{
+          aliens[j].speed = aliens[j].speed+1
+        }
+        //aliens.splice(j, 1);
+        bullets.splice(i, 1);
+        break;
+      }
+    }
+ }
+}
+
+
+//-----Action---------------------------------------
+function ActionMoveLeft(){
+  player.x -= player.speed;
+}
+function ActionMoveRight(){
+  player.x += player.speed;
+}
+let atirando=0
+function atirar(){
+  if(atirando<=0){
+    atirando=6;
+  }
+}
+
+
+document.addEventListener('keydown', (event) => {
+ switch (event.key) {
+    case 'ArrowLeft':
+      ActionMoveLeft()
+      break;
+    case 'ArrowRight':
+      ActionMoveRight()
+      break;
+    case 'a':
+      ActionMoveLeft()
+      break;
+    case 'd':
+      ActionMoveRight()
+      break;
+    case 'w':
+      atirar();
+      break;
+ }
+});
+
+initAliens();
+updateGame();
+
+</script>
+</body>
+</html>

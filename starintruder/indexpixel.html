@@ -1,0 +1,177 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Space Invaders</title>
+ <style>
+	   canvas {
+		 border: 1px solid black;
+	   }
+ </style>
+</head>
+<body>
+ <canvas id="gameCanvas" width="400" height="400"></canvas>
+</body>
+<script>
+	const canvas = document.getElementById('gameCanvas');
+const ctx = canvas.getContext('2d');
+
+let score = 0;
+
+//Inçlcuir jogador-------------------------------------------- 
+const player = {
+ x: canvas.width / 2,
+ y: canvas.height - 30,
+ size: 20, // tamanho do player
+ speed: 4, // velocidade do player
+ draw: function() {
+    ctx.fillStyle = 'red'; // Cor do Player
+    ctx.fillRect(this.x, this.y, this.size, this.size); // Posição e tramanho do Player
+ },
+};
+
+// Incluir Aliens-------------------------------------------------
+const aliens = []; // Varios aliens
+for (let i = 0; i < 10; i++) {
+ const alien = {
+    x: i * 40 + 20,
+    y: 40,
+    size: 20, // Tamnho do inimigo
+    speed: 1, // velocidade do inimigo
+    direction: 'down',
+    draw: function() {
+      ctx.fillStyle = 'green'; // Cor dos inimigos
+      ctx.fillRect(this.x, this.y, this.size, this.size); // posião e tamanho dos inimios
+    },
+ };
+ aliens.push(alien);
+}
+
+
+// Incluindo tiro-------------------------------------------------
+const bullets = []; // Varios tiros
+function fireBullet() {
+ const bullet = {
+    x: player.x + player.size / 2,
+    y: player.y,
+    size: 5, // Tamanho da bala
+    speed: 8, // Velocidade da bala
+    draw: function() {
+      ctx.fillStyle = 'red';
+      ctx.fillRect(this.x, this.y, this.size, this.size);
+    },
+ };
+ bullets.push(bullet);
+}
+
+
+function updateGame() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height); // Limpa tela
+
+    player.draw(); // desenhar jogador
+
+    for (let i = 0; i < aliens.length; i++) {
+        aliens[i].draw(); // Desenhar inimigo
+
+        if (aliens[i].direction === 'down') {
+          aliens[i].y += aliens[i].speed; // Aumentar velocidade
+        }
+
+        if (aliens[i].y >= canvas.height - 30) {
+          alert('Game Over');
+          gameOver = true;
+          return;
+        }
+    }
+
+    checkCollisions();
+    removeOffscreenBullets();
+
+    for (let i = 0; i < bullets.length; i++) {
+        bullets[i].y -= bullets[i].speed;
+        bullets[i].draw(); // Desenhar bala
+    }
+
+    //requestAnimationFrame(updateGame);
+    setTimeout(() => updateGame(), 100)
+}
+
+
+function removeOffscreenBullets() {
+ for (let i = 0; i < bullets.length; i++) {
+    if (bullets[i].y < 0) {
+      bullets.splice(i, 1);
+    }
+ }
+}
+
+
+// Verificando colisão.
+
+function checkCollisions() {
+ for (let i = 0; i < bullets.length; i++) {
+    for (let j = 0; j < aliens.length; j++) {
+      if (
+        bullets[i].x > aliens[j].x &&
+        bullets[i].x < aliens[j].x + aliens[j].size &&
+        bullets[i].y > aliens[j].y &&
+        bullets[i].y < aliens[j].y + aliens[j].size
+      ) {
+        score++;
+        aliens.splice(j, 1);
+        bullets.splice(i, 1);
+        break;
+      }
+    }
+ }
+}
+
+
+//-----Action---------------------------------------
+function ActionMoveLeft(){
+  player.x -= player.speed;
+}
+function ActionMoveRight(){
+  player.x += player.speed;
+}
+function atirar(){
+  fireBullet();
+}
+
+
+document.addEventListener('keydown', (event) => {
+ switch (event.key) {
+    case 'ArrowLeft':
+      ActionMoveLeft()
+      break;
+    case 'ArrowRight':
+      ActionMoveRight()
+      break;
+    case 'a':
+      ActionMoveLeft()
+      break;
+    case 'd':
+      ActionMoveRight()
+      break;
+    case 'w':
+      atirar();
+      break;
+ }
+});
+
+//canvas.addEventListener('click', (event) => {
+ //const rect = canvas.getBoundingClientRect();
+ //const x = event.clientX - rect.left;
+ //const y = event.clientY - rect.top;
+ //if (x >= player.x && x <= player.x + player.size && y >= player.y && y <= player.y + player.size) {
+ //   fireBullet();
+ //}
+//});
+
+updateGame();
+</script>
+</body>
+</html>
