@@ -7,15 +7,22 @@
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
  <title>Star-Intruder</title>
  <style>
-	   canvas {
-		 border: 1px solid black;
-     width : 90%;
-     height : 90%;
-	   }
+    body{
+      font-family: arial, helvetica, sans-serif;
+      color: #ffffff;
+      background-color: #000005;
+      border: 0px;
+      padding: 0px;
+    }
+	  canvas {
+		  border: 1px solid black;
+      width : 95%;
+      height : 95%;
+	  }
  </style>
 </head>
 <body>
-  <Div >
+  <Div>
     <canvas id="gameCanvas" width="862" height="420"></canvas>
   </div>
 </body>
@@ -113,6 +120,10 @@ function carregarImagens(){
     inimigo: instanciaImg('caranguejo.png'),
     caranguejo: instanciaImg('caranguejo.png'),
     caranguejo2: instanciaImg('caranguejo2.png'),
+    crocodilo: instanciaImg('crocodilo.png'),
+    crocodilo2: instanciaImg('crocodilo2.png'),
+    tubarao: instanciaImg('tubarao.png'),
+    tubarao2: instanciaImg('tubarao2.png'),
 
     cenario001: instanciaImg('cenario001.png'),
     cenario002: instanciaImg('cenario002.png'),
@@ -161,19 +172,19 @@ function initSolido(temSkin, temX, temY){
       skin: temSkin,
       draw: function() {
         if(temSkin==1){
-          drawImage(listImgs.bloco001, this.x, this.y-71, 142, 142, 1, 1);
+          drawImage(listImgs.bloco001, this.x, this.y-71, 182, 142, 1, 1);
         }else if(temSkin==2){
-          drawImage(listImgs.bloco002, this.x, this.y-71, 142, 142, 1, 1);
+          drawImage(listImgs.bloco002, this.x, this.y-71, 182, 142, 1, 1);
         }else if(temSkin==3){
-          drawImage(listImgs.bloco003, this.x, this.y-71, 142, 142, 1, 1);
+          drawImage(listImgs.bloco003, this.x, this.y-71, 182, 142, 1, 1);
         }else if(temSkin==4){
-          drawImage(listImgs.bloco004, this.x, this.y-71, 142, 142, 1, 1);
+          drawImage(listImgs.bloco004, this.x, this.y-71, 182, 142, 1, 1);
         }else if(temSkin==5){
-          drawImage(listImgs.bloco005, this.x, this.y-71, 142, 142, 1, 1);
+          drawImage(listImgs.bloco005, this.x, this.y-71, 182, 142, 1, 1);
         }else if(temSkin==6){
-          drawImage(listImgs.bloco006, this.x, this.y-71, 142, 142, 1, 1);
+          drawImage(listImgs.bloco006, this.x, this.y-71, 182, 142, 1, 1);
         }else if(temSkin==7){
-          drawImage(listImgs.bloco007, this.x, this.y-71, 142, 142, 1, 1);
+          drawImage(listImgs.bloco007, this.x, this.y-71, 182, 142, 1, 1);
         }else{
           drawImage(listImgs.bloco008, this.x, this.y-71, 142, 142, 1, 1);
         }
@@ -221,10 +232,14 @@ function initInteracao(temSkin, temX, temY){
       skin: temSkin,
       draw: function() {
         if(this.skin==1){
+          // Porta
           drawImage(listImgs.portal, this.x-10, this.y-71, 142, 142, 1, 1);
+          
         }else if(this.skin==2){
+          // Bau de tesouro
           drawImage(listImgs.bonus, this.x-35, this.y-71, 142, 142, 1, 1);
         }else if(this.skin==3){
+          // caranguejo
           if(this.frame==0){
             this.frame=1
             this.x = this.x + 5
@@ -243,6 +258,28 @@ function initInteracao(temSkin, temX, temY){
             drawImage(listImgs.caranguejo2, this.x-35, this.y-71, 142, 142, 1, 1);
           }
           
+        }else if(this.skin==4){
+          // Crocodilo
+          
+          if(this.frame<5){
+            drawImage(listImgs.crocodilo, this.x-35, this.y-71, 142, 142, 1, 1);
+          }else if(this.frame<10){
+            drawImage(listImgs.crocodilo2, this.x-35, this.y-71, 142, 142, 1, 1);
+          }else{
+            this.frame=-1
+            drawImage(listImgs.crocodilo2, this.x-35, this.y-71, 142, 142, 1, 1);
+          }
+          this.frame++
+        }else if(this.skin==5){
+          // Crocodilo
+          if(this.frame==0){
+            this.frame=1
+            drawImage(listImgs.tubarao, this.x-35, this.y-71, 142, 142, 1, 1);
+          }else{
+            this.frame=0
+            drawImage(listImgs.tubarao2, this.x-35, this.y-71, 142, 142, 1, 1);
+          }
+
         }else{
           drawImage(listImgs.caranguejo, this.x-35, this.y-71, 142, 142, 1, 1);
         }
@@ -309,7 +346,7 @@ const fazes = [
       [ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
       [ 0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,1,1,1],
       [ 0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-      [ 0,0,0,2,0,0,0,3,0,0,0,0,0,3,2,0,0,0,0],
+      [ 0,0,0,2,0,0,0,4,0,0,0,0,0,5,2,0,0,0,0],
       [ 1,0,3,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0],
       [ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
     ]
@@ -424,6 +461,7 @@ const player = {
         this.frame=0;
         drawImage(listImgs.playerandando06, this.imgx, this.y-70, 170, 100, this.direction,1);
       }
+      
     }else if(this.state=="pulando"){
       this.y = this.y - (this.speed*2);
       if(limites()==false){
@@ -460,6 +498,7 @@ const player = {
         puloduplo=false;
         drawImage(listImgs.playerpulando04, this.imgx, this.y-70, 170, 100, this.direction,1);
       }
+
     }else if(this.state=="caindo"){
       if(this.y>400){
         this.state="morrendo";
@@ -480,6 +519,28 @@ const player = {
           drawImage(listImgs.playercaindo02, this.imgx, this.y-70, 170, 100, this.direction,1);
         }
       }
+    }else if(this.state=="voadora"){
+      if(this.y>400){
+        this.state="morrendo";
+        this.frame=0;
+      }else{
+        this.y = this.y + (this.speed*2);
+        if(limites()==false){
+          this.x = this.x + (this.speed*this.direction);
+        }
+        this.imgx = this.x-60
+        movefaze(this.speed*this.direction)
+        checkColidBonus();
+        if(this.frame<3){
+          this.frame++;
+          drawImage(listImgs.playerbatendo2, this.imgx, this.y-70, 170, 100, this.direction,1);
+        }else{
+          this.frame=0;
+          drawImage(listImgs.playerbatendo1, this.imgx, this.y-70, 170, 100, this.direction,1);
+        }
+      }
+      checkColidSword();
+      
     }else if(this.state=="batendo"){
       if(this.frame==0){
         this.frame++;
@@ -493,6 +554,7 @@ const player = {
         drawImage(listImgs.playerbatendo2, this.imgx, this.y-70, 170, 100, this.direction,1);
       }
 
+ 
       checkColidSword();
 
     }else if(this.state=="dano"){
@@ -588,12 +650,15 @@ const player = {
     }
   },
   ActionBate: function() {
-    if(this.state!="morrendo"  && this.state!="caindo" && this.state!="pulando"){
+    if(this.state!="morrendo"  && this.state!="caindo" && this.state!="pulando" && this.state!="voadora"){
       this.frame=0;  
       this.state="batendo";
+    }else if(this.state=="caindo" || this.state!="pulando"){
+      this.frame=0;
+      this.state="voadora";
     }
-  }
-};
+  }  
+}
 
 var puloduplo=false;
 
@@ -644,7 +709,7 @@ function updateGame() {
 
 
     //--tratando-gravidade-----------------------------------------
-    if(player.state=="caindo"){
+    if(player.state=="caindo" || player.state=="voadora"){
       for (let i = 0; i < solidos.length; i++) {
         if(checkColidFloor(player,solidos[i])){
           player.y = solidos[i].y-20
@@ -788,7 +853,7 @@ function checkColidWall() {
 //--Verificando-colisao-espada-no-inimigo----------------------------------
 function checkColidSword() {
   for (let i = 0; i < interacao.length; i++) {
-    if(interacao[i].skin==3 ){
+    if(interacao[i].skin==3 || interacao[i].skin==4 || interacao[i].skin==5 ){
       let box1 = {x:player.x-player.width,y:player.y-player.height-2, width:player.width*3, height:player.height*2}   
       let box2 = {x:interacao[i].x,y:interacao[i].y, width:interacao[i].width, height:interacao[i].height*2}
       if(box1.x+box1.width > box2.x &&
@@ -813,7 +878,7 @@ function checkColidBonus() {
         box1.x < box2.x+box2.width &&
         box1.y+box1.height > box2.y &&
         box1.y < box2.y+box2.height){
-          if(interacao[i].skin==3){
+          if(interacao[i].skin==3 || interacao[i].skin==4 || interacao[i].skin==5){
             //tocou inimigo
             if(player.state!="dano"){
               vida = vida-1
