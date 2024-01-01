@@ -13,34 +13,98 @@
       background-color: #000005;
       border: 0px;
       padding: 0px;
+      margin:0px;
+    }
+    #divbody {
+      border: 0px;
+      padding: 0px;
+      margin:0px;
+      width : 100%;
+      background-color: #ff0000;
     }
 	  canvas {
-		  border: 1px solid black;
-      width : 95%;
-      height : 95%;
+		  border: 0px;
+      width : 100%;
+      height : 100%;
 	  }
+    #divcontroles {
+      border-top: 100px;
+      width : 90%;
+      height : 90%;
+
+      text-align: left;
+      position: absolute;
+      top: 0px;
+      left: 0px;
+    }
+    #help{
+      border: 100px;
+      background-color: #502000;
+      width : 90%;
+      padding: 10%;
+      position: absolute;
+      top: 0px;
+      left: 0px;
+    }
+    .botoes{
+      background-color: #f0f0f0;
+      padding: 3px;
+      border: 1px solid black;
+    }
  </style>
 </head>
 <body>
-  <Div>
+<div id="divbody">
+  <Div id="divgame">
     <canvas id="gameCanvas" width="862" height="420"></canvas>
   </div>
+
+  <div id="divcontroles">
+    <br/> <br/> <br/> <br/> 
+    <img id="butonW" src="bt_w.png" alt="But W"><br/>
+    <img id="butonA" src="bt_a.png" alt="But A">
+    <a id="butonD" href="#" onclick="player.ActionMoveRight();"><img src="bt_d.png" alt="But D"></a><br/>
+    <a id="butonS" href="#" onclick="player.ActionBate();"><img src="bt_s.png" alt="But S"></a>
+    
+    score : <span id="spanscore"></span> <br/>
+    vida : <span id="spanslife"></span> <br/>
+    debug : <span id="spandebug"></span> <br/>
+    <a id="butonD" class="botoes"  href="#" onclick="help(true);">HELP</a><br/> 
+  </div>
+
+  <Div id="help">   
+    <img src="logo_stray_marine.png" alt="But A" width="30%"><br/>
+    <img src="bt_a.png" alt="But A">
+    a : Move Left<br/>
+    <img src="bt_d.png" alt="But D">
+    d : Move Right<br/>
+    <img src="bt_w.png" alt="But W">
+    w : Pula<br/>
+    <img src="bt_s.png" alt="But S">
+    s : Bater<br/>
+    p : Pause <br/>
+    m : suicidio <br/>
+    n : debug <br/>
+    <a class="botoes" id="butonD" href="#" onclick="help(false);">voltar ao jogo.</a>
+  </div>
+
+</div>
 </body>
-score : <span id="spanscore"></span> <br/>
-vida : <span id="spanslife"></span> <br/>
-debug : <span id="spandebug"></span> 
-ArrowLeft : Move Left<br/>
-ArrowRight : Move Right<br/>
-ArrowUp : Pula<br/>
-ArrowDown : Bater<br/>
-a : Move Left<br/>
-d : Move Right<br/>
-w : Pula<br/>
-t : Bater<br/>
-p : Pause <br/>
-m : suicidio <br/>
-n : debug <br/>
+
+
 <script>
+
+function help(state){
+  //const canvas = document.getElementById('gameCanvas')
+  if(state){
+    document.getElementById('help').style.visibility = 'visible'
+  }else{
+    document.getElementById('help').style.visibility = 'hidden'
+  }
+}
+
+document.getElementById('butonW').addEventListener('click', function() { player.ActionPula() });
+document.getElementById('butonA').addEventListener('click', function() { player.ActionMoveLeft() });
 
 //---Instanciar-elementos-HTML---------------------------------------
 const spanscore = document.getElementById('spanscore');
@@ -172,19 +236,19 @@ function initSolido(temSkin, temX, temY){
       skin: temSkin,
       draw: function() {
         if(temSkin==1){
-          drawImage(listImgs.bloco001, this.x, this.y-71, 182, 142, 1, 1);
+          drawImage(listImgs.bloco001, this.x, this.y-71, 142, 142, 1, 1);
         }else if(temSkin==2){
-          drawImage(listImgs.bloco002, this.x, this.y-71, 182, 142, 1, 1);
+          drawImage(listImgs.bloco002, this.x, this.y-71, 142, 142, 1, 1);
         }else if(temSkin==3){
-          drawImage(listImgs.bloco003, this.x, this.y-71, 182, 142, 1, 1);
+          drawImage(listImgs.bloco003, this.x, this.y-71, 142, 142, 1, 1);
         }else if(temSkin==4){
-          drawImage(listImgs.bloco004, this.x, this.y-71, 182, 142, 1, 1);
+          drawImage(listImgs.bloco004, this.x, this.y-71, 142, 142, 1, 1);
         }else if(temSkin==5){
-          drawImage(listImgs.bloco005, this.x, this.y-71, 182, 142, 1, 1);
+          drawImage(listImgs.bloco005, this.x, this.y-71, 142, 142, 1, 1);
         }else if(temSkin==6){
-          drawImage(listImgs.bloco006, this.x, this.y-71, 182, 142, 1, 1);
+          drawImage(listImgs.bloco006, this.x, this.y-71, 142, 142, 1, 1);
         }else if(temSkin==7){
-          drawImage(listImgs.bloco007, this.x, this.y-71, 182, 142, 1, 1);
+          drawImage(listImgs.bloco007, this.x, this.y-71, 142, 142, 1, 1);
         }else{
           drawImage(listImgs.bloco008, this.x, this.y-71, 142, 142, 1, 1);
         }
