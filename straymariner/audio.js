@@ -1,4 +1,4 @@
-var varSomAtivo=true;
+
 
 function somAtivo(){
   if(varSomAtivo){

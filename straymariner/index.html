@@ -5,7 +5,7 @@
 <head>
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>Star-Intruder</title>
+ <title>Stray-Mariner</title>
  <style>
     body{
       font-family: arial, helvetica, sans-serif;
@@ -14,6 +14,8 @@
       border: 0px;
       padding: 0px;
       margin:0px;
+      font-size: 18px;
+      line-height: 1.0;
     }
     #divbody {
       border: 0px;
@@ -77,7 +79,19 @@
     .botoes{
       color: #ffffff;
       font-size: 25px;
+      line-height: 1.0;
     }
+    @media (max-width: 800px) {
+      .botoes{
+        color: #ffffff;
+        font-size: 18px;
+        line-height: 0.2;  
+      }
+      body{
+        font-size: 12px;
+      }
+    }
+
     .coluna{
       width : 33%;
       margin-right: 5%;
@@ -92,7 +106,7 @@
               margin-top : 5%;
               width: 40%;
             }
-            .joystickConteiner{
+    .joystickConteiner{
               width: 200px;
               height: 200px;
               align-items: center;
@@ -105,8 +119,8 @@
               border-color:#ffffff;
               background-color: #000000;
               opacity: 0.2;
-            }              
-            .joystickClass{
+    }              
+    .joystickClass{
               position: absolute;
               background-color: #ffffff;
               width: 100px;
@@ -116,8 +130,8 @@
               border-radius:50%;
               opacity: 0.3;
               box-shadow: 1px 2px 10px black;
-            }
-            @media (max-width: 800px) {
+    }
+    @media (max-width: 800px) {
               .joystickConteiner{
                 width: 80px;
                 height: 80px;
@@ -134,7 +148,7 @@
                 float:right;
                 margin-top:40px;
               }
-            }
+    }
 
  </style>
 </head>
@@ -148,26 +162,22 @@
   <div id="divcontroles">
    <div>.</div>
     <div id="IDJoystick" class="divJoystick">
-      <div id="joystickConteinerID" class="joystickConteiner" >
+      <div id="joystickConteiner" class="joystickConteiner" >
         <div id="joystickID" class="joystickClass"></div>
       </div>
       <div id="butJoystickID1" class="joystickClass"></div>
     </div>
 
     <div>
-      <a id="butonW" href="#" onclick="player.ActionPula();"><img id="butonW" src="bt_w.png" alt="But W" width="30%"></a><br/>
-      <a id="butonA" href="#" onclick="player.ActionMoveLeft();"><img id="butonA" src="bt_a.png" alt="But A" width="30%"></a>
-      <a id="butonD" href="#" onclick="player.ActionMoveRight();"><img src="bt_d.png" alt="But D" width="30%"></a><br/>
-      <a id="butonS" href="#" onclick="player.ActionBate();"><img src="bt_s.png" alt="But S" width="30%"></a><br/>
       score : <span id="spanscore"></span> <br/>
       vida : <span id="spanslife"></span> <br/>
       debug : <span id="spandebug"></span> <br/>
-      <a class="botoes"  href="#" onclick="ActionPause();">Pause</a><br/>
+
     </div>
 
 
     <div id="IDJoystick2" class="divJoystick">
-      <div id="joystickConteinerID2" class="joystickConteiner" >
+      <div id="joystickConteiner2" class="joystickConteiner" >
         <div id="joystickID2" class="joystickClass"></div>
       </div>
       <div id="butJoystickID2" class="joystickClass"></div>
@@ -212,9 +222,15 @@
   </Div>
   
   <Div class="janelainterface" id="help">   
-    <img src="logo.png" alt="But A" width="30%"><br/>
-    Ajuda
+    
     <div class="atDivJustificado">
+      <div class="coluna">
+        Ajuda<br>
+        <img src="ico_debug.png" alt="But A" class="icobotoes""><br/>
+        P : Pause <br/>
+        M : suicidio <br/>
+        N : debug <br/>
+      </div>
       <div class="coluna">
         <img src="vida.png" alt="But A" class="icobotoes"><br/>
         A : Move Left<br/>
@@ -229,17 +245,24 @@
         I : Move top<br/>
         K : Move down<br/>
       </div>
+
+      <div>       
+
+      </div>
+    </div>
+    <div class="atDivJustificado">
       <div class="coluna">
-        <img src="ico_debug.png" alt="But A" class="icobotoes""><br/>
-        P : Pause <br/>
-        M : suicidio <br/>
-        N : debug <br/>
+        <br/><br/>
+        <img src="logo.png" alt="But A" width="90%">
+      </div>  
+      <div class="coluna">
+        
+      </div>
+      <div class="coluna">
         <img src="ico_return.png" alt="But A" class="icobotoes"><br/>
         <a class="botoes" id="butonD" href="#" onclick="winOpen('menu');">Voltar</a>
       </div>
-      <div>
 
-      </div>
     </div>
 
   </div>
@@ -262,8 +285,11 @@
       </div>
 
       <div class="coluna">
-        <img src="ico_return.png" alt="But A" class="icobotoes"><br/>
-        <a class="botoes" id="butonD" href="#" onclick="winOpen('menu');">
+        <a href="#" onclick="winOpen('menu');">
+          <img src="ico_return.png" alt="Voltar (return)" class="icobotoes">
+        </a>
+        <br/>
+        <a class="botoes" href="#" onclick="winOpen('menu');">
           Voltar
         </a>
       </div>
@@ -275,19 +301,29 @@
   </Div>
 
   <Div class="janelainterface" id="pause">
-    <img src="logo.png" alt="But A" width="30%"><br/>
-    Menu Pause
     <div class="atDivJustificado">
-      <div>
-        <a class="botoes" id="butonD" href="#" onclick="ActionPause(true);">
-          <img src="ico_pause.png" alt="But A"  width="100%"><br/>
+      
+      <div class="coluna">
+        <a href="#" onclick="ActionPause(true);">
+          <img src="ico_pause.png" alt="Voltar ao jogo (return)"  width="70%">
+        </a>
+        <br/>
+        <a class="botoes" href="#" onclick="ActionPause(true);">  
           Voltar ao jogo (return)
         </a>
       </div>
       
-      <div>
-        <a class="botoes" id="butonD" href="#" onclick="winOpen('menu');">
-          <img src="ico_config.png" alt="But A" class="icobotoes"><br/>
+      <div class="coluna">
+        <img src="logo.png" alt="But A" width="100%"><br/>
+        Menu Pause
+      </div>
+
+      <div class="coluna">        
+        <a href="#" onclick="winOpen('menu');">
+          <img src="ico_config.png" alt="Menu inicial (init menu)" class="icobotoes">
+        </a>
+        <br/>
+        <a class="botoes" href="#" onclick="winOpen('menu');">
           Menu inicial (init menu)
         </a>
       </div>
@@ -302,8 +338,10 @@
     <img src="logo.png" alt="But A" width="35%"><br/>
     Mapa de fases:
     <div class="coluna">
-      <a class="botoes" id="butonD" href="#" onclick="winClose('mapa');">
-        <img src="ico_play.png" alt="But A"  class="icobotoes"><br/>
+      <a href="#" onclick="winClose('mapa');">
+        <img src="ico_play.png" alt="Voltar ao jogo (return)"  class="icobotoes"><br/>
+      </a>
+      <a class="botoes" href="#" onclick="winClose('mapa');">
         Voltar ao jogo <br>
         (return)
       </a>

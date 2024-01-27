@@ -23,7 +23,7 @@ function OpemMapa(){
   
   ctx.drawImage(listImgs.fundopapiro, 0, 0, 862, 420);
   ctx.drawImage(listImgs.mapa, 360, 0, 400, 430);
-  ctx.save();
+  //ctx.save();
   if(fazeatual==0){
     ctx.drawImage(listImgs.icomapa, 410, 320, 50, 50);
   }else if(fazeatual==1){
@@ -45,7 +45,7 @@ function OpemMapa(){
   }else if(fazeatual==9){
     ctx.drawImage(listImgs.icomapa, 400, 300, 50, 50);
   }
-  ctx.restore();
+  //ctx.restore();
 }
 
 
@@ -678,8 +678,8 @@ function drawImage(img, x, y, width, height, scalew, scaleh) {
       if (vida>2){
         ctx.drawImage(listImgs.vida, 730, 4, 40, 40);
       }
-      spanslife.innerText = vida;
-      spanscore.innerText = score;
+      //spanslife.innerText = vida;
+      //spanscore.innerText = score;
       ctx.font = '18px Comic Sans MS';
       ctx.fillStyle = "white";
       ctx.fillText("ponto : "+score, 40, 35);
@@ -729,6 +729,7 @@ function resetvars(){
 
 
 function initFaze(){
+  funSound(1);
   vida=3;
   resetvars()
   initSolidos();
@@ -748,6 +749,7 @@ function proximaFase(){
   pause = true;
   OpemMapa()
   //ActionPause();
+  
 }
   
   
@@ -811,6 +813,7 @@ function proximaFase(){
                 //Bateu com a espada  
                 score=score+1
                 interacao[i].state = "dano";
+                funSound(1);
             }
         }
       }
@@ -860,11 +863,12 @@ function proximaFase(){
               //player tocou inimigo (Nota: ewtes calculos não estão corretos.)
               if(player.state!="dano"&&interacao[i].state=="vivo"){
                 vida = vida-1
-                spanslife.innerText = vida;
+                //spanslife.innerText = vida;
                 if(vida<1){
                   player.state = "morrendo";
                 }else{
                   player.state = "dano"; 
+                  funSound(1);
                   //interacao.splice(i, 1);    
                 }
               }
@@ -978,6 +982,9 @@ function proximaFase(){
   
   carregarImagens();
   initSolidos();
+  initJoystick();
+  funSound(1); 
+
   //updateGame();
   //winOpen('menu');
   //setTimeout(() => winOpen('help'), 90) // Processar novamente esta função em 10 segundos

@@ -1,16 +1,26 @@
 
-
-
-document.getElementById('butonW').addEventListener('click', function() { player.ActionPula() });
-document.getElementById('butonA').addEventListener('click', function() { player.ActionMoveLeft() });
   
 //---Instanciar-elementos-HTML---------------------------------------
 const spanscore = document.getElementById('spanscore');
 const spanslife = document.getElementById('spanslife');
 const spandebug = document.getElementById('spandebug');
+
+const idAudioAmbiente = document.getElementById('idAudioAmbiente');
+const idAudioFX = document.getElementById('idAudioFX');
+
 const canvas = document.getElementById('gameCanvas'); // instanciar canvas
 const ctx = canvas.getContext('2d'); // contexto 2D
   
+var varSomAtivo=true;
+
+//--Instanciar-Controles----------------------------------------------
+const joystickConteiner = document.getElementById("joystickConteiner");
+const joystick = document.getElementById("joystickID");
+const joystickConteiner2 = document.getElementById("joystickConteiner2");
+const joystick2 = document.getElementById("joystickID2");
+const butJoystickID1 = document.getElementById("butJoystickID1");
+const butJoystickID2 = document.getElementById("butJoystickID2");
+
 //---Declarar-variaveis---------------------------------------
 var score = 0;
 var vida = 3;

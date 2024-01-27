@@ -2,6 +2,8 @@
 //----Escutadores---------------------------------------------------------------------------
 
 function addEvent(el, type, callback) {
+  el.addEventListener(type, callback);
+  /*
   console.log("type=" + type + " : Adiciona eventos pra navegadores modernos e antigos");
   //Erro no joystick.addEventListener
   if (el.addEventListener) {
@@ -9,9 +11,12 @@ function addEvent(el, type, callback) {
   } else if (el.attachEvent) {
     el.adttachEvent("on" + type, callback);
   }
+  */
 }
 
 function removeEvent(el, type, callback) {
+  el.addEventListener(type, callback);
+  /*
   console.log("type=" + type + " : Adiciona eventos pra navegadores modernos e antigos");
   //Erro no joystick.addEventListener
   if (el.addEventListener) {
@@ -19,6 +24,7 @@ function removeEvent(el, type, callback) {
   } else if (el.attachEvent) {
     el.adttachEvent("on" + type, callback);
   }
+  */
 }
 
   // Inicio do controle ____________________________________________________________________________
@@ -106,6 +112,7 @@ function removeEvent(el, type, callback) {
         if (el.offsetTop > joystickInitTop) {
           if (el == joystick) {
             player.ActionBate();
+            
             //varDirecao=0.5;
             //moverPersonagem(+0.5); //(ok)
           } else {
@@ -119,7 +126,7 @@ function removeEvent(el, type, callback) {
             //varDirecao=-0.5;
             //moverPersonagem(-0.5); //(ok)
           } else {
-            papagaio.ActionUp()
+            papagaio.ActionUp();
             //player.ActionBate();
             
           }
@@ -140,6 +147,7 @@ function removeEvent(el, type, callback) {
     joystick2.style.left = joystickConteiner2.style.left;
     joystick2.style.top = joystickConteiner2.style.top;
     isMove = false;
+    player.ActionStop();
   }
 
 
@@ -148,29 +156,31 @@ function removeEvent(el, type, callback) {
     //Escutando eventos joystick.
     //butJoystickID1.onClick = function () { starPular() };
     //butJoystickID2.onClick = function () { funClickLink() };
-    addEvent(butJoystickID1, "mousedown", function (e) { starPular() }); // Clicou no botao da esquerda
-    addEvent(butJoystickID2, "mousedown", function (e) { funClickLink() }); // Clicou no botao da direita
-
-    joystickConteiner = document.getElementById("joystickConteinerID");
-    joystick = document.getElementById("joystickID");
-    joystickConteiner2 = document.getElementById("joystickConteinerID2");
-    joystick2 = document.getElementById("joystickID2");
-
+    
     //Usando a função addEvent() para verificar qual a melhor forma de escutar o evento.
+
+    addEvent(butJoystickID1, "mousedown", function (e) { player.ActionBate() }); // Clicou no botao da esquerda
+    addEvent(butJoystickID2, "mousedown", function (e) { ActionPause() }); // Clicou no botao da direita
+    addEvent(butJoystickID1, "touchend", function (e) { player.ActionBate() }); // Clicou no botao da esquerda
+    addEvent(butJoystickID2, "touchend", function (e) { ActionPause() }); // Clicou no botao da direita
+
+    //--Muse------------------    
     addEvent(joystick, "mousedown", function (e) { funMousedown(joystick, e) }); // Clicou com o mouse
     addEvent(joystick2, "mousedown", function (e) { funMousedown(joystick2, e) }); // Clicou com o mouse
 
     addEvent(joystickConteiner, "mousemove", function (e) { funMouseMove(joystick, e) }); //Moveu o mouse
     addEvent(joystickConteiner2, "mousemove", function (e) { funMouseMove(joystick2, e) }); //Moveu o mouse
-    //addEvent(document, "mousemove", function (e) {funMouseMove(joystick,e)}); //Moveu o mouse
+    
+    addEvent(canvas, "mouseup", function () { funmouseup() }); //Soltou o mouse 
     addEvent(document, "mouseup", function () { funmouseup() }); //Soltou o mouse 
 
-    //--------------------
-    addEvent(joystick, "touchstart", function (e) { getTouchStart(joystick, e) }); // Clicou com o mouse
-    addEvent(joystick2, "touchstart", function (e) { getTouchStart(joystick2, e) }); // Clicou com o mouse
+    //--Touch------------------
+    addEvent(joystick, "touchstart", function (e) { getTouchStart(joystick, e) }); // Tocou com o dedo
+    addEvent(joystick2, "touchstart", function (e) { getTouchStart(joystick2, e) }); // Tocou com o dedo
 
-    addEvent(joystickConteiner, "touchmove", function (e) { getTouchMove(joystick, e) }); //Moveu o mouse
-    addEvent(joystickConteiner2, "touchmove", function (e) { getTouchMove(joystick2, e) }); //Moveu o mouse
-    //addEvent(document, "touchmove", function (e) {getTouchMove(joystick,e)}); //Moveu o mouse
-    addEvent(document, "touchend", function () { funmouseup() }); //Soltou o mouse
+    addEvent(joystickConteiner, "touchmove", function (e) { getTouchMove(joystick, e) }); //Moveu o dedo
+    addEvent(joystickConteiner2, "touchmove", function (e) { getTouchMove(joystick2, e) }); //Moveu o dedo
+    
+    addEvent(canvas, "touchend", function () { funmouseup() }); //Tirou o dedo da tela
+    addEvent(document, "touchend", function () { funmouseup() }); //Tirou o dedo da tela
   };
