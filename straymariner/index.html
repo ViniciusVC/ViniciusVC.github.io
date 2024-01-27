@@ -50,6 +50,9 @@
     }
     #divcontroles{
       visibility: hidden;
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
     }
     #help{
       visibility: hidden;
@@ -82,6 +85,57 @@
     .icobotoes{
       width : 50%;
     }
+
+    /*==Controles================================================*/
+    .divJoystick{
+              padding : 15px;
+              margin-top : 5%;
+              width: 40%;
+            }
+            .joystickConteiner{
+              width: 200px;
+              height: 200px;
+              align-items: center;
+              display: flex;
+              flex-direction: row;
+              flex-wrap: wrap;
+              justify-content: center;
+              border:solid 3px;
+              border-radius:50%;
+              border-color:#ffffff;
+              background-color: #000000;
+              opacity: 0.2;
+            }              
+            .joystickClass{
+              position: absolute;
+              background-color: #ffffff;
+              width: 100px;
+              height: 100px;
+              border:solid 3px;
+              border-color:#000000;
+              border-radius:50%;
+              opacity: 0.3;
+              box-shadow: 1px 2px 10px black;
+            }
+            @media (max-width: 800px) {
+              .joystickConteiner{
+                width: 80px;
+                height: 80px;
+              }
+              .joystickClass{
+                width: 40px;
+                height: 40px;
+              }
+              #butJoystickID1{
+                margin-left : 40px;
+                margin-top:40px;
+              }
+              #butJoystickID2{
+                float:right;
+                margin-top:40px;
+              }
+            }
+
  </style>
 </head>
 <body>
@@ -92,17 +146,40 @@
   </div>
 
   <div id="divcontroles">
-    <br/> <br/> <br/> <br/> 
-    <img id="butonW" src="bt_w.png" alt="But W"><br/>
-    <img id="butonA" src="bt_a.png" alt="But A">
-    <a id="butonD" href="#" onclick="player.ActionMoveRight();"><img src="bt_d.png" alt="But D"></a><br/>
-    <a id="butonS" href="#" onclick="player.ActionBate();"><img src="bt_s.png" alt="But S"></a>
-    
-    score : <span id="spanscore"></span> <br/>
-    vida : <span id="spanslife"></span> <br/>
-    debug : <span id="spandebug"></span> <br/>
-    <a class="botoes"  href="#" onclick="winOpen('help');">HELP</a><br/> 
+   <div>.</div>
+    <div id="IDJoystick" class="divJoystick">
+      <div id="joystickConteinerID" class="joystickConteiner" >
+        <div id="joystickID" class="joystickClass"></div>
+      </div>
+      <div id="butJoystickID1" class="joystickClass"></div>
+    </div>
+
+    <div>
+      <a id="butonW" href="#" onclick="player.ActionPula();"><img id="butonW" src="bt_w.png" alt="But W" width="30%"></a><br/>
+      <a id="butonA" href="#" onclick="player.ActionMoveLeft();"><img id="butonA" src="bt_a.png" alt="But A" width="30%"></a>
+      <a id="butonD" href="#" onclick="player.ActionMoveRight();"><img src="bt_d.png" alt="But D" width="30%"></a><br/>
+      <a id="butonS" href="#" onclick="player.ActionBate();"><img src="bt_s.png" alt="But S" width="30%"></a><br/>
+      score : <span id="spanscore"></span> <br/>
+      vida : <span id="spanslife"></span> <br/>
+      debug : <span id="spandebug"></span> <br/>
+      <a class="botoes"  href="#" onclick="ActionPause();">Pause</a><br/>
+    </div>
+
+
+    <div id="IDJoystick2" class="divJoystick">
+      <div id="joystickConteinerID2" class="joystickConteiner" >
+        <div id="joystickID2" class="joystickClass"></div>
+      </div>
+      <div id="butJoystickID2" class="joystickClass"></div>
+    </div>
+
+    <div>.</div>
+     
   </div>
+
+
+
+
 
   <Div class="janelainterface" id="menu">
     <img src="logo.png" alt="But A" width="30%"><br/>
@@ -172,7 +249,7 @@
     <div class="atDivJustificado">
       <div class="coluna">
         <img src="ico_som.png" alt="But A"class="icobotoes"><br/>
-        <a class="botoes" id="butonD" href="#" onclick="winOpen('menu');">
+        <a class="botoes" id="butonD" href="#" onclick="somAtivo();">
           Som
         </a>
       </div>
@@ -231,8 +308,15 @@
         (return)
       </a>
     </div>
-
   </Div>
+
+  <div class="janelainterface">
+    <audio id="idAudioAmbiente" src="musica_sailor.mp3" loop autoplay>
+      ERRO : Seu navegador nao suporta o elemento <code>audio</code>.
+    </audio>
+    <audio id="idAudioFX" src="dano.wav">
+    </audio>
+  </div>
 
 </div>
 </body>
@@ -240,6 +324,8 @@
 <script type="text/javascript" src="fases.js"></script>
 <script type="text/javascript" src="player.js"></script>
 <script type="text/javascript" src="player2.js"></script>
+<script type="text/javascript" src="controles.js"></script>
+<script type="text/javascript" src="audio.js"></script>
 <script type="text/javascript" src="straymariner.js"></script>
 <script>
 
