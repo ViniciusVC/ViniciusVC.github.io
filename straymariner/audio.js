@@ -12,7 +12,7 @@ function somAtivo(){
     idAudioAmbiente.play().catch(error => {
       console.log("Error ao tocar som! Ignore este erro.")
     });
-    funSound(2); // Tocar uma mbarulinho cristal.
+    funSound(2); // Tocar um barulinho.
   }
 }
 
@@ -23,16 +23,21 @@ function funSound(numSom){
     if(numSom==1){
       //-Som-ambiente---------------------------------
       //idAudioAmbiente.src=varSom;
-      idAudioAmbiente.volume = 0.05;
-      idAudioAmbiente.play().catch(error => {
-        console.log("Error ao tocar som! Ignore este erro.")
-      });
+      idAudioAmbiente.volume = 0.1;
+    }else if(numSom==2){
+      //-Som-efeitos---------------------------------
+      idAudioFX.src="morreu2.m4a";
+    }else if(numSom==3){
+      //-Som-efeitos---------------------------------
+      idAudioFX.src="cristal.m4a";
     }else{
       //-Som-efeitos---------------------------------
-      //idAudioFX.src="dano.wav";
+      idAudioFX.src="MeteoroBateu.mp3";
+    } 
+     
       idAudioFX.play().catch(error => {
         console.log("Error ao tocar som! Ignore este erro.")
       });
-    }
+    
   }
 }

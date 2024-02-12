@@ -1,9 +1,7 @@
 
 //----Escutadores---------------------------------------------------------------------------
-
+/*
 function addEvent(el, type, callback) {
-  el.addEventListener(type, callback);
-  /*
   console.log("type=" + type + " : Adiciona eventos pra navegadores modernos e antigos");
   //Erro no joystick.addEventListener
   if (el.addEventListener) {
@@ -11,12 +9,9 @@ function addEvent(el, type, callback) {
   } else if (el.attachEvent) {
     el.adttachEvent("on" + type, callback);
   }
-  */
 }
 
 function removeEvent(el, type, callback) {
-  el.addEventListener(type, callback);
-  /*
   console.log("type=" + type + " : Adiciona eventos pra navegadores modernos e antigos");
   //Erro no joystick.addEventListener
   if (el.addEventListener) {
@@ -24,8 +19,8 @@ function removeEvent(el, type, callback) {
   } else if (el.attachEvent) {
     el.adttachEvent("on" + type, callback);
   }
-  */
 }
+*/
 
   // Inicio do controle ____________________________________________________________________________
 
@@ -159,28 +154,51 @@ function removeEvent(el, type, callback) {
     
     //Usando a função addEvent() para verificar qual a melhor forma de escutar o evento.
 
+    butJoystickID1.addEventListener("click", function () {player.ActionBate()}); // Clicou no botao da esquerda
+    butJoystickID2.addEventListener("click", function () {ActionPause()}); // Clicou no botao da direita
+    butJoystickID1.addEventListener("touchend", function () {player.ActionBate()}); // Tocou o botao da esquerda
+    butJoystickID2.addEventListener("touchend", function () {ActionPause()}); // Tocou o botao da direita
+
+    //--Muse------------------    
+    joystick.addEventListener("mousedown", function (e) { funMousedown(joystick, e) }); // Clicou com o mouse
+    joystick2.addEventListener("mousedown", function (e) { funMousedown(joystick2, e) }); // Clicou com o mouse
+    
+    joystickConteiner.addEventListener("mousemove", function (e) { funMouseMove(joystick, e) }); //Moveu o mouse
+    joystickConteiner2.addEventListener("mousemove", function (e) { funMouseMove(joystick2, e) }); //Moveu o mouse
+      
+    canvas.addEventListener("mouseup", function () { funmouseup() }); //Soltou o mouse 
+    document.addEventListener("mouseup", function () { funmouseup() }); //Soltou o mouse 
+    
+    //--Touch------------------
+    joystick.addEventListener("touchstart", function (e) { getTouchStart(joystick, e) }); // Tocou com o dedo
+    joystick2.addEventListener("touchstart", function (e) { getTouchStart(joystick2, e) }); // Tocou com o dedo
+    
+    joystickConteiner.addEventListener("touchmove", function (e) { getTouchMove(joystick, e) }); //Moveu o dedo
+    joystickConteiner2.addEventListener("touchmove", function (e) { getTouchMove(joystick2, e) }); //Moveu o dedo
+        
+    canvas.addEventListener("touchend", function () { funmouseup() }); //Tirou o dedo da tela
+    document.addEventListener("touchend", function () { funmouseup() }); //Tirou o dedo da tela
+
+
+    /*
     addEvent(butJoystickID1, "mousedown", function (e) { player.ActionBate() }); // Clicou no botao da esquerda
     addEvent(butJoystickID2, "mousedown", function (e) { ActionPause() }); // Clicou no botao da direita
     addEvent(butJoystickID1, "touchend", function (e) { player.ActionBate() }); // Clicou no botao da esquerda
     addEvent(butJoystickID2, "touchend", function (e) { ActionPause() }); // Clicou no botao da direita
-
     //--Muse------------------    
     addEvent(joystick, "mousedown", function (e) { funMousedown(joystick, e) }); // Clicou com o mouse
     addEvent(joystick2, "mousedown", function (e) { funMousedown(joystick2, e) }); // Clicou com o mouse
-
     addEvent(joystickConteiner, "mousemove", function (e) { funMouseMove(joystick, e) }); //Moveu o mouse
     addEvent(joystickConteiner2, "mousemove", function (e) { funMouseMove(joystick2, e) }); //Moveu o mouse
-    
     addEvent(canvas, "mouseup", function () { funmouseup() }); //Soltou o mouse 
     addEvent(document, "mouseup", function () { funmouseup() }); //Soltou o mouse 
-
     //--Touch------------------
     addEvent(joystick, "touchstart", function (e) { getTouchStart(joystick, e) }); // Tocou com o dedo
     addEvent(joystick2, "touchstart", function (e) { getTouchStart(joystick2, e) }); // Tocou com o dedo
-
     addEvent(joystickConteiner, "touchmove", function (e) { getTouchMove(joystick, e) }); //Moveu o dedo
     addEvent(joystickConteiner2, "touchmove", function (e) { getTouchMove(joystick2, e) }); //Moveu o dedo
-    
     addEvent(canvas, "touchend", function () { funmouseup() }); //Tirou o dedo da tela
     addEvent(document, "touchend", function () { funmouseup() }); //Tirou o dedo da tela
+    */
+
   };

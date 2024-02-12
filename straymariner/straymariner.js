@@ -403,6 +403,7 @@ function drawImage(img, x, y, width, height, scalew, scaleh) {
                         this.state="vivo";
                     }else{
                         this.state="morto"; 
+                        funSound(2);
                     } 
                 }
                 drawImage(listImgs.caranguejo3, this.x-35, this.y-71, 142, 142, 1, 1);
@@ -813,7 +814,7 @@ function proximaFase(){
                 //Bateu com a espada  
                 score=score+1
                 interacao[i].state = "dano";
-                funSound(1);
+                funSound(4);
             }
         }
       }
@@ -844,6 +845,7 @@ function proximaFase(){
                     interacao[i].state = "atordoado"; // "dano";
                 }
               }else if(interacao[i].skin==2 ){
+                funSound(3);
                 //Pegou bonus
                 score=score+3
                 //spanscore.innerText = score;
@@ -866,13 +868,15 @@ function proximaFase(){
                 //spanslife.innerText = vida;
                 if(vida<1){
                   player.state = "morrendo";
+                  funSound(2);
                 }else{
                   player.state = "dano"; 
-                  funSound(1);
+                  funSound(4);
                   //interacao.splice(i, 1);    
                 }
               }
             }else if(interacao[i].skin==2 ){
+              funSound(3);
               //Pegou bonus
               score=score+3
               //spanscore.innerText = score;
