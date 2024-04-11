@@ -1,0 +1,374 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Stray-Mariner</title>
+ <style>
+    body{
+      font-family: arial, helvetica, sans-serif;
+      color: #ffffff;
+      background-color: #000005;
+      border: 0px;
+      padding: 0px;
+      margin:0px;
+      font-size: 18px;
+      line-height: 1.0;
+    }
+    #divbody {
+      border: 0px;
+      padding: 0px;
+      margin:0px;
+      width : 95%;
+      background-color: #000000;
+    }
+	  canvas {
+		  border: 0px;
+      width : 100%;
+      height : 100%;
+	  }
+    #divcontroles {
+      border-top: 100px;
+      width : 90%;
+      height : 90%;
+      text-align: left;
+      position: absolute;
+      top: 0px;
+      left: 0px;
+    }
+
+    .janelainterface{
+      border: 0px;
+      width : 70%;
+      margin-top: 5%;
+      margin-left:15%;
+      margin-right:15%;
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      color:#101000
+    }
+    #divcontroles{
+      visibility: hidden;
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+    }
+    #help{
+      visibility: hidden;
+    }
+    #config{
+      visibility: hidden;
+    }
+    #pause{
+      visibility: hidden;
+    }
+    #menu{
+      border: 0px;
+    }
+    #mapa{
+      visibility: hidden;
+    }
+    .atDivJustificado {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+    }
+    .botoes{
+      color: #ffffff;
+      font-size: 25px;
+      line-height: 1.0;
+    }
+    @media (max-width: 800px) {
+      .botoes{
+        color: #ffffff;
+        font-size: 18px;
+        line-height: 0.2;  
+      }
+      body{
+        font-size: 12px;
+      }
+    }
+
+    .coluna{
+      width : 33%;
+      margin-right: 5%;
+    }
+    .icobotoes{
+      width : 50%;
+    }
+
+    /*==Controles================================================*/
+    .divJoystick{
+              padding : 15px;
+              margin-top : 5%;
+              width: 40%;
+            }
+    .joystickConteiner{
+              width: 200px;
+              height: 200px;
+              align-items: center;
+              display: flex;
+              flex-direction: row;
+              flex-wrap: wrap;
+              justify-content: center;
+              border:solid 3px;
+              border-radius:50%;
+              border-color:#ffffff;
+              background-color: #000000;
+              opacity: 0.2;
+    }              
+    .joystickClass{
+              position: absolute;
+              background-color: #ffffff;
+              width: 100px;
+              height: 100px;
+              border:solid 3px;
+              border-color:#000000;
+              border-radius:50%;
+              opacity: 0.3;
+              box-shadow: 1px 2px 10px black;
+    }
+    @media (max-width: 800px) {
+              .joystickConteiner{
+                width: 80px;
+                height: 80px;
+              }
+              .joystickClass{
+                width: 40px;
+                height: 40px;
+              }
+              #butJoystickID1{
+                margin-left : 40px;
+                margin-top:40px;
+              }
+              #butJoystickID2{
+                float:right;
+                margin-top:40px;
+              }
+    }
+
+ </style>
+</head>
+<body>
+<div id="divbody">
+
+  <Div id="divgame">
+    <canvas id="gameCanvas" width="862" height="420"></canvas>
+  </div>
+
+  <div id="divcontroles">
+   <div>.</div>
+    <div id="IDJoystick" class="divJoystick">
+      <div id="joystickConteiner" class="joystickConteiner" >
+        <div id="joystickID" class="joystickClass"></div>
+      </div>
+      <div id="butJoystickID1" class="joystickClass"></div>
+    </div>
+
+    <div>
+      score : <span id="spanscore"></span> <br/>
+      vida : <span id="spanslife"></span> <br/>
+      debug : <span id="spandebug"></span> <br/>
+
+    </div>
+
+
+    <div id="IDJoystick2" class="divJoystick">
+      <div id="joystickConteiner2" class="joystickConteiner" >
+        <div id="joystickID2" class="joystickClass"></div>
+      </div>
+      <div id="butJoystickID2" class="joystickClass"></div>
+    </div>
+
+    <div>.</div>
+     
+  </div>
+
+
+
+
+
+  <Div class="janelainterface" id="menu">
+    <img src="logo.png" alt="But A" width="30%"><br/>
+    menu principal
+    <div class="atDivJustificado">
+      <div class="coluna">
+        <img src="ico_help.png" alt="But A" class="icobotoes"><br/>
+        <a class="botoes" id="butonD" href="#" onclick="winOpen('help');">
+          Ajuda<br/><br/>(Help)
+        </a>
+      </div>
+      
+      <div class="coluna">
+        <img src="ico_play.png" alt="But A" class="icobotoes"><br/>
+        <a class="botoes" id="butonD" href="#" onclick="initFaze();">
+          Jogar<br/><br/>(Play)
+        </a>
+      </div>
+      
+      <div class="coluna">
+        <img src="ico_config.png" alt="But A" class="icobotoes"><br/>
+        <a class="botoes" id="butonD" href="#" onclick="winOpen('config');">
+          Configurações<br/><br/>(config)
+        </a>
+      </div>
+      <div>
+
+      </div>
+    </div>
+  </Div>
+  
+  <Div class="janelainterface" id="help">   
+    
+    <div class="atDivJustificado">
+      <div class="coluna">
+        Ajuda<br>
+        <img src="ico_debug.png" alt="But A" class="icobotoes""><br/>
+        P : Pause <br/>
+        M : suicidio <br/>
+        N : debug <br/>
+      </div>
+      <div class="coluna">
+        <img src="vida.png" alt="But A" class="icobotoes"><br/>
+        A : Move Left<br/>
+        D : Move Right<br/>
+        W : Move up<br/>
+        S : move Below<br/>
+        F : move attack<br/>
+      </div>
+      <div class="coluna">
+        <img src="vida2.png" alt="But A" class="icobotoes"><br/>
+        J : Move Left<br/>
+        L : Move Right<br/>
+        I : Move top<br/>
+        K : Move down<br/>
+      </div>
+
+      <div>       
+
+      </div>
+    </div>
+    <div class="atDivJustificado">
+      <div class="coluna">
+        <br/><br/>
+        <img src="logo.png" alt="But A" width="90%">
+      </div>  
+      <div class="coluna">
+        
+      </div>
+      <div class="coluna">
+        <img src="ico_return.png" alt="But A" class="icobotoes"><br/>
+        <a class="botoes" id="butonD" href="#" onclick="winOpen('menu');">Voltar</a>
+      </div>
+
+    </div>
+
+  </div>
+
+  <Div class="janelainterface" id="config">
+    <img src="logo.png" alt="But A" width="30%"><br/>
+    <div class="atDivJustificado">
+      <div class="coluna">
+        <img src="ico_som.png" alt="But A"class="icobotoes"><br/>
+        <a class="botoes" id="butonD" href="#" onclick="somAtivo();">
+          Som
+        </a>
+      </div>
+      
+      <div class="coluna">
+        <img src="ico_controles.png" alt="But A" class="icobotoes"><br/>
+        <a class="botoes" id="butonD" href="#" onclick="winOpen('menu');">
+          controles
+        </a>
+      </div>
+
+      <div class="coluna">
+        <a href="#" onclick="winOpen('menu');">
+          <img src="ico_return.png" alt="Voltar (return)" class="icobotoes">
+        </a>
+        <br/>
+        <a class="botoes" href="#" onclick="winOpen('menu');">
+          Voltar
+        </a>
+      </div>
+      
+      <div>
+
+      </div>
+    </div>
+  </Div>
+
+  <Div class="janelainterface" id="pause">
+    <div class="atDivJustificado">
+      
+      <div class="coluna">
+        <a href="#" onclick="ActionPause(true);">
+          <img src="ico_pause.png" alt="Voltar ao jogo (return)"  width="70%">
+        </a>
+        <br/>
+        <a class="botoes" href="#" onclick="ActionPause(true);">  
+          Voltar ao jogo (return)
+        </a>
+      </div>
+      
+      <div class="coluna">
+        <img src="logo.png" alt="But A" width="100%"><br/>
+        Menu Pause
+      </div>
+
+      <div class="coluna">        
+        <a href="#" onclick="winOpen('menu');">
+          <img src="ico_config.png" alt="Menu inicial (init menu)" class="icobotoes">
+        </a>
+        <br/>
+        <a class="botoes" href="#" onclick="winOpen('menu');">
+          Menu inicial (init menu)
+        </a>
+      </div>
+      
+      <div>
+
+      </div>
+    </div>
+  </Div>
+
+  <Div class="janelainterface" id="mapa">
+    <img src="logo.png" alt="But A" width="35%"><br/>
+    Mapa de fases:
+    <div class="coluna">
+      <a href="#" onclick="winClose('mapa');">
+        <img src="ico_play.png" alt="Voltar ao jogo (return)"  class="icobotoes"><br/>
+      </a>
+      <a class="botoes" href="#" onclick="winClose('mapa');">
+        Voltar ao jogo <br>
+        (return)
+      </a>
+    </div>
+  </Div>
+
+  <div class="janelainterface">
+    <audio id="idAudioAmbiente" src="musica_littlemermaidstune.wav" loop autoplay>
+      ERRO : Seu navegador nao suporta o elemento <code>audio</code>.
+    </audio>
+    <audio id="idAudioFX" src="musica_littlemermaidstune.wav">
+    </audio>
+  </div>
+
+</div>
+</body>
+<script type="text/javascript" src="initelement.js"></script>
+<script type="text/javascript" src="fases.js"></script>
+<script type="text/javascript" src="player.js"></script>
+<script type="text/javascript" src="player2.js"></script>
+<script type="text/javascript" src="controles.js"></script>
+<script type="text/javascript" src="audio.js"></script>
+<script type="text/javascript" src="straymariner.js"></script>
+<script>
+
+</script>
+
+</body>
+</html>
