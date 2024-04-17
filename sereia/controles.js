@@ -106,24 +106,29 @@ function removeEvent(el, type, callback) {
       if (difLeft <= difTop) {
         if (el.offsetTop > joystickInitTop) {
           if (el == joystick) {
-            player.ActionBate();
-            
+
+            player.ActionBelow();
+            //player.ActionBate();
             //varDirecao=0.5;
             //moverPersonagem(+0.5); //(ok)
+
+
           } else {
             papagaio.ActionBelow()
             //player.ActionPula();
-            
           }
         } else if (el.offsetTop < joystickInitTop) {
           if (el == joystick) {
-            player.ActionPula();
+
+            player.ActionUp();
+            //player.ActionPula();
             //varDirecao=-0.5;
             //moverPersonagem(-0.5); //(ok)
+
+
           } else {
             papagaio.ActionUp();
             //player.ActionBate();
-            
           }
         }
       }

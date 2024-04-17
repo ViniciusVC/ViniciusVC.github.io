@@ -29,7 +29,7 @@ const player = {
         movefaze(this.speed*this.direction)
         if(checkColidWall()){
           this.x = this.x - (this.speed*2*this.direction);
-          movefaze(-1*this.speed*this.direction)
+          movefaze(-1*this.speed*2*this.direction)
         }
         //checkColidBonus();
         this.imgx = this.x-60

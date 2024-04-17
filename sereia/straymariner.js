@@ -361,7 +361,7 @@ function drawImage(img, x, y, width, height, scalew, scaleh) {
                     //this.state=="vivo"
                     //interacao.splice(i, 1);
                 }
-                drawImage(listImgs.crocodilo6, this.x-35, this.y-71, 142, 142, 1, 1);
+                drawImage(listImgs.crocodilo6, this.x-35, this.y-+this.frame-71, 142, 142, 1, 1);
 
             }else if(this.state=="atordoado"){
                 if(this.frame>20){
