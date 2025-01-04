@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jogo de Conquista de territoro</title>
+  <style>
+    body {
+      background-color: #000000;
+      color: #ffffff;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 12px;
+
+    }
+    .botao{
+      width: 100px;
+      height: 90px;
+      border: 2px solid;
+      color: #ffffff;
+      background-color: #50350d;
+      border-top-color: #b3894a;
+      border-right-color: #b3894a;
+      border-bottom-color: #000000;
+      border-left-color: #000000;
+
+    }
+    .botao:hover{
+      background-color: #b3894a;
+      border-color: #ffffff;
+    }
+    
+    .janela{
+      border: 0px;
+      margin: 0px;
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      color:#101000;
+      background-color: #b3894a;
+      background-image: url("./img/papiro.jpg");
+      background-repeat: no-repeat;
+    }
+
+
+    .blocoInfo{
+      background-color: #492f08;
+      width: 400px;
+      height: 100px;
+      display: flex;
+      justify-content: space-between;     
+    }
+
+    .blocoInfoFoto{
+      width: 60px;
+      padding: 5px;     
+    }
+
+    #imgFotoRei{
+      border: 2px solid #ff0000;
+    }
+
+    #spanFotoRei{
+      font-size: 10px;
+    }
+
+    .blocoInfoTexto{
+      width: 240px;
+      height: 100px;
+      display: block;
+    }
+
+    canvas {
+      display: block;
+      margin: 0 auto;
+      background-color: #000000;
+    }
+
+    .colunasPontos{
+      display: flex;
+      justify-content: space-between;
+      width: 70%;
+      padding-left: 15%;
+      padding-right: 15%;
+    }
+    .colunaPontos{
+      width: 15%;
+      padding: 5px;
+      border: 2px solid #311f04;
+      margin-left: 5px;
+    }
+
+    .listadeMapas{
+      display: flex;
+      justify-content: space-between;      
+      width: 500px;
+      margin-left: 200px;
+    }
+
+    @media only screen and (min-width: 940px) {
+      .divAllGame{
+        display: flex;
+        justify-content: space-between;
+        width: 910px;
+      }
+      .menudojogo {
+        background-color: #311f04;
+        display: block;
+        width: 110px;
+      }
+      .janela{
+        width: 910px;
+        height: 600px;
+        background-size: 910px 600px;
+      }
+      .blocoInfo{
+        width: 100px;
+        margin: 3px;
+      }
+      .blocoInfoTexto{
+        visibility: hidden;
+      }
+    }
+    @media only screen and (max-width: 940px) {
+      .divAllGame{
+        display: block;
+        width: 800px;
+      }
+      .menudojogo {
+        background-color: #311f04;
+        display: flex;
+        justify-content: space-between;
+        width: 800;
+      }
+      .janela{
+        width: 800px;
+        height: 700px;
+        background-size: 800px 700px;
+      }
+
+    }
+  </style>
+</head>
+<body>
+  <div class="divAllGame">   
+    <canvas id="gameCanvas" width="800" height="600"></canvas>
+    <div id="menu" class="menudojogo" >
+
+      <div class="blocoInfo">
+        <div class="blocoInfoFoto">
+          <img id="imgFotoRei" src="img/rei_1_azul.jpg" alt="foto do rei" width="50" height="50">
+          <span id="spanFotoRei">Jogador</span>
+        </div>
+
+        <div class="blocoInfoTexto">
+          <span id="spanTurno">Turno atual.</span><br/>
+          <span id="spanCoordenadas">Clique no canvas.</span><br/>
+          <span id="spanResume">...</span><br/>
+        </div>
+
+      </div>
+
+
+
+      <div id="btCriarUnidade" onclick="criarUnidde()" class="botao">
+        Criar unidade<br/>
+        <img src="img/campones.png" alt="Criar unidade" width="50" height="50">
+      </div>
+
+      <div id="btCriarCastelo" onclick="criarCastelo()" class="botao">
+        Criar Castelo<br/>
+        <img src="img/castelinho.png" alt="Criar Castelo" width="50" height="50">     
+      </div>
+
+      <div id="btAumentarTropa" onclick="aumentarTropa()" class="botao">
+        Aumentar tropa<br/>
+        <img src="img/espadachin.png" alt="Aumentar tropa" width="50" height="50">
+      </div>
+
+      <div id="btMoverAtacar" onclick="preparaMoverAtacar()" class="botao">
+        Mover/atacar<br/>
+        <img src="img/bt_mover.png" alt="Prepara para mover" width="50" height="50">
+      </div>
+
+      <div id="btMover" onclick="moverTropas()" class="botao">
+        Mover<br/>
+        <img src="img/bt_move.png" alt="move" width="50" height="50">
+      </div>
+
+    </div>
+  </div>
+  
+
+
+  <div id="divWinMapas" class="janela">
+    <br/><br/>
+    <h1>
+      <img src="img/logo_imperio_medieval.png" alt="Imperio Medieval" width="400" height="50">
+    </h1>
+    <h3>Escolha um mapa</h3>
+    <div class="listadeMapas">   
+      <div>
+        <img src="img/mapa1.jpg" alt="mapa1" width="60" height="50">
+        <br/><br/>
+        <a class="botao" onclick="initGame(0)">
+          mapa1 - lha
+        </a>
+        
+          
+      </div>
+
+      <div>
+        <img src="img/mapa2.jpg" alt="mapa2" width="60" height="50">
+        <br/><br/>
+        <a class="botao" onclick="initGame(1)">mapa2 - rio
+        </a>
+      </div>
+
+      <div>
+        <img src="img/mapa3.jpg" alt="mapa3" width="60" height="50">
+        <br/><br/>
+        <a class="botao" onclick="initGame(2)">mapa3 - vulcao
+        </a>
+      </div>
+
+      <div>
+        <img src="img/mapa4.jpg" alt="mapa4" width="60" height="50">
+        <br/><br/>
+        <a class="botao" onclick="initGame(3)">mapa4 - lava
+        </a>
+      </div>
+    </div>
+    
+
+    <br/>
+    <br/>
+    <br/>
+    <a onclick="winOpen('divMenuInicial')" class="botao">[voltar]</a>
+  </div>
+
+  <div id="divWinPause" class="janela">
+    <br/><br/>
+    <h1><img src="img/logo_imperio_medieval.png" alt="Imperio Medieval" width="400" height="50"></h1>
+    <h2>PAUSE</h2>
+    <a class="botao" onclick="ActionPause()" >. Voltar ao jogo [P] .</a>
+    <br/><br/><br/>
+    <div class="colunasPontos" >
+      <div class="colunaPontos">
+        <img src="img/rei_1_azul.jpg" alt="foto do rei" width="50" height="50">
+        <p>
+        Jogador: 1<br/>
+        Você<br/>
+        Cor: azul<br/>
+        Territorio :<span id="spanTeritorio1">...</span><br/>
+        </p>
+      </div>
+      
+      <div class="colunaPontos">
+        <img src="img/rei_2_vermelho.jpg" alt="foto do rei" width="50" height="50">
+        <p>
+        Jogador: 2<br/>
+        Bot<br/>
+        Cor: vermelho<br/>
+        Territorio :<span id="spanTeritorio2">...</span><br/>
+        </p>
+      </div>
+
+      <div class="colunaPontos">
+        <img src="img/rei_3_verde.jpg" alt="foto do rei" width="50" height="50">
+        <p>
+        Jogador: 3<br/>
+        Bot<br/>
+        Cor: verde<br/>
+        Territorio :<span id="spanTeritorio3">...</span><br/>
+        </p>
+      </div>
+
+      <div class="colunaPontos">
+        <img src="img/rei_4_amarelo.jpg" alt="foto do rei" width="50" height="50">
+        <p>
+        Jogador: 4<br/>
+        Bot<br/>
+        Cor: amarelo<br/>
+        Territorio :<span id="spanTeritorio4">...</span><br/>
+        </p>
+      </div>
+
+      <div class="colunaPontos">
+        <img src="img/rei_5_roza.jpg" alt="foto do rei" width="50" height="50">
+        <p>
+        Jogador: 5<br/>
+        Bot<br/>
+        Cor: roza<br/>
+        Territorio :<span id="spanTeritorio5">...</span><br/>
+        </p>
+      </div>
+
+      <div class="colunaPontos">
+        <img src="img/rei_6_azul_claro.jpg" alt="foto do rei" width="50" height="50">
+        <p>
+        Jogador: 6<br/>
+        Bot<br/>
+        Cor: azul claro<br/>
+        Territorio :<span id="spanTeritorio6">...</span><br/>
+        </p>
+      </div>
+    </div>
+    <p>Conquiste o maior numero de territorios posiveis e derrote as outras nações.</p>
+  </div>
+
+
+  <div id="divWinVitoria" class="janela">
+    <br/><br/>
+    <h1><img src="img/logo_imperio_medieval.png" alt="Imperio Medieval" width="200" height="25"></h1>
+    <h2>VITORIA</h2>
+    <img src="img/vitoria_rei_azul.jpg" alt="foto do rei" width="300" height="300">
+    <p>O impréio azul derrotou todos os outros.</p>
+    <a onclick="winOpen('divMenuInicial')" class="botao">Inicio</a>
+  </div>
+
+  <div id="divWinHelp" class="janela">
+    <br/><br/>
+    <h1><img src="img/logo_imperio_medieval.png" alt="Imperio Medieval" width="400" height="50"></h1>
+    <h3>Sobre o Jogo</h3>
+    <p>
+      ImperioMedieval é um jogo de estrategia, onde o objetivo é conquista o maior numero de territorios possiveis.<br/>
+      É um game independente brasileiro, desenvolvido pelo <a href="https://vvcestudio.com.br/pt/eu">Vinicius Valente</a>. 
+    </p>
+    <img src="img/rei_1_azul.jpg" alt="foto do rei" width="100" height="100">
+    <br/>
+    <a onclick="winOpen('divMenuInicial')" class="botao">voltar</a>
+  </div>
+
+  <div id="divMenuInicial" class="janela">
+    <br/><br/>
+    <h1><img src="img/logo_imperio_medieval.png" alt="Imperio Medieval" width="400" height="50"></h1>
+    <h3>Menu Inicial</h3>
+    <br/>
+    <a onclick="winOpen('divWinMapas')" class="botao">Escolher mapa</a>
+    <a onclick="winOpen('divWinHelp')" class="botao">Sobre o Jogo</a>
+    <br/>
+    <p>Jogo de Conquista de territoro</p>
+  </div>
+
+  <script type="text/javascript" src="js/bot.js"></script>
+  <script type="text/javascript" src="js/ui.js"></script>
+  <script type="text/javascript" src="js/fases.js"></script>
+  <script type="text/javascript" src="js/mundoatual.js"></script>
+  <script type="text/javascript" src="js/equipes.js"></script>
+  <script type="text/javascript" src="js/game.js"></script>
+</body>
+</html>
