@@ -1,0 +1,13 @@
+.desenho {
+  text-align: center;
+  font-family: Arial, sans-serif;
+  background-color: #bebebe;
+}
+#drawingCanvas {
+  background-color: #ffffff;
+  border: 1px solid black;
+  cursor: crosshair;
+}
+.desenhocontrols {
+  background-color: #bebebe;
+}

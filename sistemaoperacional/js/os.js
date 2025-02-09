@@ -1,18 +1,19 @@
 
-var DivIntro, IdJanelaConversorDeTextos, IdJanelaConversorDeUnidade, IdJanelaRelogio,IdJanelaCalculadora, IdJanelaNote, IdJanelaWWW;
+var spanAppAtual, DivIntro, IdJanelaConversorDeTextos, IdJanelaConversorDeUnidade, IdJanelaRelogio,IdJanelaCalculadora, IdJanelaNote, IdJanelaWWW, IdJanelaDesenho;
 	
 	function init(){
-		console.log("iniciou o Game.");
+		console.log("iniciou Sistema Operacional.");
 		DivIntro = document.getElementById("DivIntro"); // Esconder tela inicial.
-		
+		spanAppAtual = document.getElementById("spanAppAtual");
+
 		IdJanelaCalculadora = document.getElementById("IdJanelaCalculadora");
 		IdJanelaConversorDeTextos = document.getElementById("IdJanelaConversorDeTextos");
 		IdJanelaConversorDeUnidade = document.getElementById("IdJanelaConversorDeUnidade");
 		IdJanelaRelogio = document.getElementById("IdJanelaRelogio");
 		IdJanelaNote = document.getElementById("IdJanelaNote");
 		IdJanelaWWW = document.getElementById("IdJanelaWWW");
+		IdJanelaDesenho = document.getElementById("IdJanelaDesenho");
 		
-
 		DivIntro.style.display = "none"; //Esconder Janela de Informações.
 		
 		fecharJanela(IdJanelaCalculadora);
@@ -21,6 +22,7 @@ var DivIntro, IdJanelaConversorDeTextos, IdJanelaConversorDeUnidade, IdJanelaRel
 		fecharJanela(IdJanelaRelogio);
 		fecharJanela(IdJanelaNote);
 		fecharJanela(IdJanelaWWW);
+		fecharJanela(IdJanelaDesenho);
 
 		Dragable(IdJanelaCalculadora); //Mover janela.
 		Dragable(IdJanelaConversorDeTextos); //Mover janela.
@@ -28,19 +30,43 @@ var DivIntro, IdJanelaConversorDeTextos, IdJanelaConversorDeUnidade, IdJanelaRel
 		Dragable(IdJanelaRelogio); //Mover janela.
 		Dragable(IdJanelaNote); //Mover janela.
 		Dragable(IdJanelaWWW); //Mover janela.
+		//Dragable(IdJanelaDesenho); //Mover janela.
 		
 		//animate();
 	};
 
+	function setAppAtual(el){
+		let tempAPPatual = "";
+		if (IdJanelaCalculadora==el){
+			tempAPPatual = "Calculadora";
+		} else if (IdJanelaConversorDeTextos==el){
+			tempAPPatual = "Conversor de Textos";
+		} else if (IdJanelaConversorDeUnidade==el){
+			tempAPPatual = "Conversor de Unidade";
+		} else if (IdJanelaRelogio==el){
+			tempAPPatual = "Relogio";
+		} else if (IdJanelaNote==el){
+			tempAPPatual = "Notas";
+		} else if (IdJanelaWWW==el){
+			tempAPPatual = "Internet";
+		} else if (IdJanelaDesenho==el){
+			tempAPPatual = "Desenho";
+		}
+		spanAppAtual.innerHTML = tempAPPatual
+	}
+
 	function abrirJanela(el){
+		setAppAtual(el);
 		el.style.display = "block"; //Mostrar janela de Edição de materiais.
 	}
 	
 	function fecharJanela(el){
+		setAppAtual("");
 		el.style.display = "none"; //Esconder Janela de Editor de materiais.
 	}
 	
 	function MaxJanela(el){
+		setAppAtual(el);
 		if(el.style.width == "98%"){
 			el.style.width = "50%";
 		}else{
@@ -51,6 +77,7 @@ var DivIntro, IdJanelaConversorDeTextos, IdJanelaConversorDeUnidade, IdJanelaRel
 	}
 
 	function moveJanelaTop(el){
+		setAppAtual(el);
 		el.style.top = "0";
 		el.style.left = "0";
 	}
@@ -81,6 +108,7 @@ var DivIntro, IdJanelaConversorDeTextos, IdJanelaConversorDeUnidade, IdJanelaRel
 				xel = 0, yel = 0; // Ultima posição do elemento.
 
 			addEvent(el, "mousedown", function (e) {
+				setAppAtual(el);
 				isMove = true;
 				el.className += " isMoving";
 				x = window.event ? window.event.clientX : e.pageX;

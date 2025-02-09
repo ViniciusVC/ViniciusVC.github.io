@@ -115,3 +115,15 @@
   margin-top: 85px;
   margin-left: 190px;
 }
+
+/* ----------Relogio Digital----------------- */
+.relogioDigiFundo {
+  display: block;
+  text-align: center;
+  background-color: #303030;
+  width: 150px;
+  color: #ACF0F2;
+  font-family: Verdana, Arial, Tahoma, Serif;
+  font-size:25px;
+  border-radius: 5px;
+}
