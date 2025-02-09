@@ -1,0 +1,79 @@
+.textarea {
+  width: 100%;
+}
+.btLinkBranco {
+  height: 3.42857143rem;
+}
+.btConvetTexto {
+
+  border: solid 2px #000f92;
+  border-radius: 5px;
+  
+  padding: 5px;
+  
+  transition: all 0.8s;
+  font-family: oiTextRegular, sans-serif;
+  
+  background-color:#000f92;
+  background: rgba(0, 255, 255, 0.2);
+
+  color: #000f92;
+  display: block;
+  font-size: 1rem; /*16px*/
+  text-align: center;
+
+  text-decoration: none;
+  
+  cursor: pointer;
+  outline: 0;
+  margin-right: 5px;
+  margin-bottom: 5px; 
+  box-sizing: border-box;
+  font-style: normal;
+
+  width: 100%;
+  max-width: 500px;
+}
+.btConvetTexto:hover {
+    transition: all 0.8s;
+    -webkit-transition: all 0.8s;
+    -moz-transition: all 0.8s;
+    -o-transition: all 0.8s;
+    color: #fff;
+    background-color: #4a516b;
+}
+
+.DesenhoSombra {
+    font-family: oiTextRegular, sans-serif;
+    background-color: #ffffff;
+    border-radius: 8px;
+    color: #222222;
+    display: block;
+    font-size: 1rem; /*16px*/
+    text-align: center;
+    width: 90%;
+    text-decoration: none;
+    border: solid 1px #dbdbdb;
+    cursor: pointer;
+    outline: 0;
+    margin: 10px;
+    padding: 1.2rem;
+    box-sizing: border-box;
+    font-style: normal;
+    transition: 0.5s;
+    -webkit-box-shadow: 1px 1px 10px rgba(1, 1, 1, 0.47);
+    -moz-box-shadow: 1px 1px 10px rgba(1, 1, 1, 0.47);
+    box-shadow: 1px 1px 10px rgba(1, 1, 1, 0.47);
+    
+}
+
+
+.justificado{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.vertical{
+  display: block;
+  width: 100%;
+}

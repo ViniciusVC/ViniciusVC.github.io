@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <title>Converte Unidade</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="css/converteunidade.css" />
+</head>
+
+<body>
+
+  <div>
+    <select id="selMedidaPre" name="selMedidaPre" onChange="converter()">
+            <option value="metros">metros(meters)</option>
+            <option value="Quilômetros">Quilômetros(kilometers)</option>
+            <option value="centimetros">centimetros(centimeters)</option>
+            <option value="Milímetros">Milímetros(millimeter)</option>
+            <option value="Micrômetros">Micrômetros(Micrometers)</option>
+            <option value="Nanômetros">Nanômetros(Nanometers)</option>
+            <option value="Milhas">Milhas(Miles)</option>
+            <option value="Jardas">Jardas(yards)</option>
+            <option value="pés">pés(foot)</option>
+            <option value="polegada">polegada(inch)</option>
+            <option value="milha nautica">milha nautica(nautical mile)</option>
+    </select>
+    <input type="number" id="impMedidaPre" name="impMedidaPre" required autofocus maxlength="20"/><br/>
+    <br/>
+    <select id="selMedidaPos" name="selMedidaPos" onChange="converter()">
+            <option value="metros">metros(meters)</option>
+            <option value="Quilômetros">Quilômetros(kilometers)</option>
+            <option value="centimetros">centimetros(centimeters)</option>
+            <option value="Milímetros">Milímetros(millimeter)</option>
+            <option value="Micrômetros">Micrômetros(Micrometers)</option>
+            <option value="Nanômetros">Nanômetros(Nanometers)</option>
+            <option value="Milhas">Milhas(Miles)</option>
+            <option value="Jardas">Jardas(yards)</option>
+            <option value="pés">pés(foot)</option>
+            <option value="polegada">polegada(inch)</option>
+            <option value="milha nautica">milha nautica(nautical mile)</option>
+    </select>
+    <input type="number" id="impMedidaPos" name="impMedidaPos" maxlength="20"/><br/>
+  </div>
+
+<script type="text/javascript" src="js/converteunidade.js"></script>
+
+</body>
+</html>

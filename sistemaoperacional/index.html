@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <title>window Virtual</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="css/styles.css" />
+  <link rel="stylesheet" type="text/css" href="css/calculadora.css" />
+  <link rel="stylesheet" type="text/css" href="css/relogio.css" />
+  <link rel="stylesheet" type="text/css" href="css/conversordetexto.css" />
+  <link rel="stylesheet" type="text/css" href="css/converteunidade.css" />
+</head>
+
+<body>
+
+    <div class="divBody">
+
+	<div id="DivMenuOS" class="ClassDivMenuOS">
+		
+		<a href="javascript:abrirJanela(IdJanelaNote)" class="icone">
+			<div class="btIcon">
+				<img src="img/ico_note.png" alt="Conversor de letra" width="50px"/>
+			</div>
+		</a>
+
+		<a href="javascript:abrirJanela(IdJanelaConversorDeTextos)" class="icone">
+			<div class="btIcon">
+				<img src="img/ico_letra.png" alt="Conversor de letra" width="50px"/>
+			</div>
+		</a>
+		<a href="javascript:abrirJanela(IdJanelaConversorDeUnidade)" class="icone">
+			<div class="btIcon">
+				<img src="img/ico_medida.png" alt="Conversor de medida" width="50px"/>
+			</div>
+		</a>
+		<a href="javascript:abrirJanela(IdJanelaRelogio)" class="icone">
+			<div class="btIcon">
+				<img src="img/ico_relogio.png" alt="relogio" width="50px"/>
+			</div>
+		</a>
+		<a href="javascript:abrirJanela(IdJanelaCalculadora)" class="icone">
+			<div class="btIcon">
+				<img src="img/ico_calculadora.png" alt="calculadora" width="50px" height="50px"/>
+			</div>
+		</a>
+		<a href="javascript:abrirJanela(IdJanelaWWW)" class="icone">
+			<div class="btIcon">
+				<img src="img/ico_www.png" alt="IdJanelaWWW" width="50px" height="50px"/>
+			</div>
+		</a>	
+	</div>
+
+	<div id="IdJanelaWWW" class="classDivJanelaNaveg">
+		<div class="atDivNavegTop">
+			Internet
+			<a href='javascript:fecharJanela(IdJanelaWWW)' class="icone"><div class="atDivNavegBola corvermelho"></div></a>
+			<a href='javascript:fecharJanela(IdJanelaWWW)' class="icone"><div class="atDivNavegBola coramarelo"></div></a>
+			<a href='javascript:MaxJanela(IdJanelaWWW)' class="icone"><div class="atDivNavegBola corverde"></div></a>
+		</div>
+		<iframe src="https://vvcestudio.com.br/pt" width="100%" height="480" title="internet"></iframe>
+	</div>
+
+	<div id="IdJanelaNote" class="classDivJanelaNaveg">
+		<div class="atDivNavegTop">
+			Bloco de notas
+			<a href='javascript:fecharJanela(IdJanelaNote)' class="icone"><div class="atDivNavegBola corvermelho"></div></a>
+			<a href='javascript:fecharJanela(IdJanelaNote)' class="icone"><div class="atDivNavegBola coramarelo"></div></a>
+			<a href='javascript:MaxJanela(IdJanelaNote)' class="icone"><div class="atDivNavegBola corverde"></div></a>
+		</div>
+			<textarea class="Note" id="textareaNote" name="textareaNote" rows="20" cols="100"></textarea><br />
+	</div>
+
+	
+	<div id="IdJanelaCalculadora" class="classDivJanelaNaveg">
+		<div class="atDivNavegTop">
+			Calculadora
+			<a href='javascript:fecharJanela(IdJanelaCalculadora)' class="icone"><div class="atDivNavegBola corvermelho"></div></a>
+			<a href='javascript:fecharJanela(IdJanelaCalculadora)' class="icone"><div class="atDivNavegBola coramarelo"></div></a>
+			<a href='javascript:fecharJanela(IdJanelaCalculadora)' class="icone"><div class="atDivNavegBola corverde"></div></a>
+		</div>
+			<div class="divCalculadora">
+				<input type="number" class="impCalc" id="impCalcNum" name="impCalcNum" maxlength="15" value="0"/><br/>
+				<div class="justificado">
+				  <div class="vertical">
+					<div><a id="btLinkIniciar" class="btCalculadora" onClick="funCalcCE()">CE</a></div>
+					<div><a id="btLinkIniciar" class="btCalculadora" onClick="funConctNum('7')">7</a></div>
+					<div><a id="btLinkIniciar" class="btCalculadora" onClick="funConctNum('4')">4</a></div>
+					<div><a id="btLinkIniciar" class="btCalculadora" onClick="funConctNum('1')">1</a></div>
+					<div><a id="btLinkIniciar" class="btCalculadora" onClick="funConctPonto()">,</a></div>
+				  </div>
+				  
+				  <div class="vertical">
+					<div><a id="btLinkIniciar" class="btCalculadora" onClick="funCalcRaiz()">R</a></div>
+					<div><a id="btLinkIniciar" class="btCalculadora" onClick="funConctNum('8')">8</a></div>
+					<div><a id="btLinkIniciar" class="btCalculadora" onClick="funConctNum('5')">5</a></div>
+					<div><a id="btLinkIniciar" class="btCalculadora" onClick="funConctNum('2')">2</a></div>
+					<div><a id="btLinkIniciar" class="btCalculadora" onClick="funConctNum('0')">0</a></div>
+				  </div>
+		
+				  <div class="vertical">
+					<div><a id="btLinkIniciar" class="btCalculadora" onClick="funCalcDel()">&#60</a></div>
+					<div><a id="btLinkIniciar" class="btCalculadora" onClick="funConctNum('9')">9</a></div>  
+					<div><a id="btLinkIniciar" class="btCalculadora" onClick="funConctNum('6')">6</a></div>
+					<div><a id="btLinkIniciar" class="btCalculadora" onClick="funConctNum('3')">3</a></div>
+					<div><a id="btLinkIniciar" class="btCalculadora" onClick="funCalcPorcento()">%</a></div>
+				  </div>
+		
+				  <div class="vertical">
+					<div><a id="btLinkIniciar" class="btCalculadora" onClick="funCalcSinal('+')">+</a></div>
+					<div><a id="btLinkIniciar" class="btCalculadora" onClick="funCalcSinal('-')">-</a></div>
+					<div><a id="btLinkIniciar" class="btCalculadora" onClick="funCalcSinal('*')">x</a></div>
+					<div><a id="btLinkIniciar" class="btCalculadora" onClick="funCalcSinal('/')">/</a></div>
+					<div><a id="btLinkIniciar" class="btCalculadora" onClick="funCalcIgual()">=</a></div>
+				  </div>
+		
+				</div>
+				<input type="text" class="impCalc" id="impCalcLog" name="impCalcLog" maxlength="15"/><br/>
+		</div>
+	</div>
+
+
+		<div id="IdJanelaConversorDeTextos" class="classDivJanelaNaveg">
+			<div class="atDivNavegTop">
+				Conversor de Textos
+				<a href='javascript:fecharJanela(IdJanelaConversorDeTextos)' class="icone"><div class="atDivNavegBola corvermelho"></div></a>
+				<a href='javascript:fecharJanela(IdJanelaConversorDeTextos)' class="icone"><div class="atDivNavegBola coramarelo"></div></a>
+				<a href='javascript:MaxJanela(IdJanelaConversorDeTextos)' class="icone"><div class="atDivNavegBola corverde"></div></a>
+			</div>
+			<div class="atDivCodigo">
+
+				<div class="justificado">
+					<Div class="vertical">
+					  <div>
+						Digite ou cole o texto aqui:<br/>
+						<textarea class="DesenhoSombra" id="textareaoriginal" name="textareaoriginal" rows="6" cols="40">
+						Digite ou cole seu texto aqui.
+						</textarea><br />
+					  </div>
+					  <div>
+						Texto convertido:<br/>
+						<textarea class="DesenhoSombra" id="textareaconvertido" name="textareaconvertido" rows="6" cols="45" spellCheck="false">
+						</textarea><br />
+					  </div>
+					</Div>
+			  
+					<div class="vertical">
+					  <br/>
+					  <div class="btConvetTexto" id="btLinkConvertc">
+						<a>TUDO MAIÚSCULA.</a>
+					  </div><br/>
+					  <div class="btConvetTexto" id="btLinkConvertd">
+						<a>tudo minuscula</a>
+					  </div><br/>            
+					  <div class="btConvetTexto" id="btLinkConverta">
+						<a></a>Primeira letra da fraze maiuscula</a>
+					  </div><br/>
+					  <div class="btConvetTexto" id="btLinkConvertf">
+						<a>pRIMEIRA LETRA DA FRAZE MINUSCULA</a>
+					  </div><br/>
+					  <div class="btConvetTexto" id="btLinkConvertb">
+						<a>Todas As Primeiras Letras Maiusculas</a>
+					  </div><br/>
+					  <div class="btConvetTexto" id="btLinkConverte">
+						<a>tODAS aS pRIMEIRAS lETRAS mINUSCULAS</a>
+					  </div>
+					<br/>
+				  </div>
+			  
+				</div>
+
+			</div>
+		</div>
+
+
+		<div id="IdJanelaConversorDeUnidade" class="classDivJanelaNaveg">
+			<div class="atDivNavegTop">
+				Conversor de Unidade
+				<a href='javascript:fecharJanela(IdJanelaConversorDeUnidade)' class="icone"><div class="atDivNavegBola corvermelho"></div></a>
+				<a href='javascript:fecharJanela(IdJanelaConversorDeUnidade)' class="icone"><div class="atDivNavegBola coramarelo"></div></a>
+				<a href='javascript:MaxJanela(IdJanelaConversorDeUnidade)' class="icone"><div class="atDivNavegBola corverde"></div></a>
+			</div>
+			<div class="atDivCodigo">					
+				<div>
+					<select id="selMedidaPre" name="selMedidaPre" onChange="converter()">
+							<option value="metros">metros(meters)</option>
+							<option value="Quilômetros">Quilômetros(kilometers)</option>
+							<option value="centimetros">centimetros(centimeters)</option>
+							<option value="Milímetros">Milímetros(millimeter)</option>
+							<option value="Micrômetros">Micrômetros(Micrometers)</option>
+							<option value="Nanômetros">Nanômetros(Nanometers)</option>
+							<option value="Milhas">Milhas(Miles)</option>
+							<option value="Jardas">Jardas(yards)</option>
+							<option value="pés">pés(foot)</option>
+							<option value="polegada">polegada(inch)</option>
+							<option value="milha nautica">milha nautica(nautical mile)</option>
+					</select>
+					<input type="number" id="impMedidaPre" name="impMedidaPre" required autofocus maxlength="20"/><br/>
+					<br/>
+					<select id="selMedidaPos" name="selMedidaPos" onChange="converter()">
+							<option value="metros">metros(meters)</option>
+							<option value="Quilômetros">Quilômetros(kilometers)</option>
+							<option value="centimetros">centimetros(centimeters)</option>
+							<option value="Milímetros">Milímetros(millimeter)</option>
+							<option value="Micrômetros">Micrômetros(Micrometers)</option>
+							<option value="Nanômetros">Nanômetros(Nanometers)</option>
+							<option value="Milhas">Milhas(Miles)</option>
+							<option value="Jardas">Jardas(yards)</option>
+							<option value="pés">pés(foot)</option>
+							<option value="polegada">polegada(inch)</option>
+							<option value="milha nautica">milha nautica(nautical mile)</option>
+					</select>
+					<input type="number" id="impMedidaPos" name="impMedidaPos" maxlength="20"/><br/>
+				  </div>
+			</div>
+		</div>
+
+
+		<div id="IdJanelaRelogio" class="classDivJanelaNaveg">
+			<div class="atDivNavegTop">
+				Relogio
+				<a href='javascript:fecharJanela(IdJanelaRelogio)' class="icone"><div class="atDivNavegBola corvermelho"></div></a>
+				<a href='javascript:fecharJanela(IdJanelaRelogio)' class="icone"><div class="atDivNavegBola coramarelo"></div></a>
+				<a href='javascript:moveJanelaTop(IdJanelaRelogio)' class="icone"><div class="atDivNavegBola corverde"></div></a>
+			</div>
+	
+					<div id="btLInitRelogAnalo">
+					  Carregando Relogio Analogico...
+					</div>
+					<div id="relogioAnalogico" class="relogioFundo">
+					  <div class="hora12">12</div>
+					  <div class="hora6">6</div>
+					  <div class="hora9">9</div>
+					  <div class="hora3">3</div>
+					  <div id="analogicHours" class="ponteiros hours"></div> 
+					  <div id="analogicMinutes"  class="ponteiros minutes"></div> 
+					  <div id="analogicSeconds" class="ponteiros seconds"></div> 
+					  <div class="parafuso"></div> 
+					</div>
+
+		</div>
+		
+
+		<img src="https://img.icons8.com/color/256/recycle-bin.png" alt="lixeira" width="80px"/>
+		
+
+	<div id="DivIntro" class="telaIntro justific">
+			<div class="DivEspaco">.
+			</div>
+			<div class="DivInftexto">
+				<h1>Sistema Operacional Web</h1>
+				<P>
+					Iniciar simulação de interface de sistema operacional. 
+				</P>
+				<a href="javascript:init()" class="btLink1">
+					iniciar
+				</a>
+				<p>
+					<i>Obs.: JavaScript precisa estar habilitado para jogar Privacidade em Risco! - Teste.</i>
+				</p>
+			</div>
+			<div class="DivEspaco">
+				
+			</div>
+	<div>
+</div>
+
+<script type="text/javascript" src="js/os.js"></script>
+<script type="text/javascript" src="js/camculadora.js"></script>
+<script type="text/javascript" src="js/relogio.js"></script>
+<script type="text/javascript" src="js/conversordetexto.js"></script>
+<script type="text/javascript" src="js/converteunidade.js"></script>
+</body>
+</html>

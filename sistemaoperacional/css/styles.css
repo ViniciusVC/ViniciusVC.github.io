@@ -1,0 +1,245 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    padding: 0px;
+    margin : 0px;
+    background-color: blue;
+}
+.divBody {
+    position: absolute;
+    top: 0px;
+    height: 100%;
+    width: 100%;
+    border:0px;
+    background-image: url("../img/wallpaper1.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.divControles{
+    position: absolute;
+    top: 0px;
+    height: 100%;
+    width: 100%;
+}
+
+.justific{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+/* --- botão ------------------- */
+
+.btLink1 {
+        font-family: oiTextRegular, sans-serif;
+        background-color: #f8562c;
+        background-image: linear-gradient(260deg, #fb851c, #f8562c);
+        border-radius: 7px;
+        color: #ffffff;
+        display: block;
+        font-size: 1rem; /*16px*/
+        height: 3.42857143rem;
+        text-align: center;
+        width: 280px;
+        text-decoration: none;
+        border-bottom: solid 1px #dbdbdb;
+        cursor: pointer;
+        outline: 0;
+        margin: 0;
+        padding-top: 1.2rem;
+        box-sizing: border-box;
+        font-style: normal;
+        transition-duration: 1s;
+      }
+      .btLink1:hover {
+        transition-duration: 1s;
+        color: #f8562c;
+        border: solid 1px #fb851c;
+        background-color: #ffffff;
+        background-image: none;
+      }
+
+    .btIcon {
+        width: 80%;
+        font-family: oiTextRegular, sans-serif;
+        background-color: #2cd9f8;
+        background-image: linear-gradient(900deg, #909090, #ffffff);
+        border-radius: 9px;
+        color: #ffffff;
+        display: block;
+        font-size: 1.5rem; /*16px*/
+        height: 3.42857143rem;
+        text-align: center;
+        text-decoration: none;
+        border-bottom: solid 1px #dbdbdb;
+        cursor: pointer;
+        outline: 0;
+        margin: 5px;
+        padding: 2px;
+        box-sizing: border-box;
+        font-style: normal;
+        transition-duration: 1s;
+
+        -webkit-box-shadow: 1px 9px 20px rgba(1, 1, 1, 0.57);
+        -moz-box-shadow: 1px 9px 20px rgba(1, 1, 1, 0.57);
+        box-shadow: 1px 9px 20px rgba(1, 1, 1, 0.57);
+    }
+    .btIcon:hover {
+        width: 100%;
+        transition-duration: 1s;
+        font-size: 1.9rem; /*16px*/
+        color: #000000;
+        background-color: #ffffff;
+        background-image: none;
+    }
+
+/* --- tela inicial ------------------- */
+
+    .telaIntro{
+        position: absolute;
+        height: 100%;
+        top: 0px;
+        background-image: url("https://images.sftcdn.net/images/t_app-cover-l,f_auto/p/00401d78-9b29-11e6-81ff-00163ed833e7/3942345496/windows-10-login-background-changer-screenshot.jpg");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+    }
+
+    .DivInftexto{
+        width: 80%;
+        height: 60%;
+        font-size: 17px;
+        font-family: sans-serif;
+        background-color: #212121;
+        background: rgba(0, 255, 255, 0.5);
+        padding: 10px;
+        margin-top: 10%;
+    }
+    .DivEspaco{
+        width: 10%;
+    }
+
+/* --- Janela padrao ------------------- */
+
+      .atDivNavegBola {
+        width : 10px;
+        height : 10px;
+        background-color: #ff5247;
+        margin: 0px;
+        margin-top: 4px;
+        margin-left: 8px;
+        border-radius : 10px;
+      }
+
+      .corvermelho {
+         background-color: #ff5247;
+      }
+      .coramarelo {
+        background-color: #f7cf00;
+      }
+      .corverde {
+        background-color: #00e047;
+      }
+    
+      .atDivNavegTop {
+        width: 100%;
+        height :20px;
+        font-size: 17px;
+        font-family: sans-serif;
+        background-color: #282c45;
+        background-image: linear-gradient(45deg, #9d9d9d, #e2e2e2 );
+        border-top-left-radius :  10px;
+        border-top-right-radius :  10px;
+        display: inline-flex;
+        flex-wrap: wrap;
+        /*display: block;*/
+        /*border: solid 1px #000000;*/
+        padding: 0px;
+        box-sizing: border-box;
+      }
+      .atDivCodigo {
+        color:#000000;
+        padding : 10px;
+      }
+
+      #IdJanelaConversorDeTextos{
+        width: 50%;
+      }
+      #IdJanelaConversorDeUnidade{
+        width: 350px;
+      }
+      #IdJanelaMensagem{
+        width: 25%;
+      }
+#IdJanelaWWW{
+  width: 80%;
+}
+      .classDivJanelaNaveg{
+        position: absolute;
+        margin-bottom: 10px;
+        font-size: 17px;
+        font-family: sans-serif;
+        background-color: #282c45;
+        background-image: linear-gradient(45deg, #cfc0db, #ffffff, #cfc0db );
+        border-radius : 10px;
+        /*display: block;
+        border: solid 1px #000000;*/
+        box-sizing: border-box;
+
+        -webkit-box-shadow: -9px 9px 20px rgba(1, 1, 1, 0.57);
+        -moz-box-shadow: -9px 9px 20px rgba(1, 1, 1, 0.57);
+        box-shadow: -9px 9px 20px rgba(1, 1, 1, 0.57);
+        
+        padding: 0px;
+        
+        top: 5%;
+        left: 15%;
+      }
+
+    /* --- Janela menu do sistema operacional ------------------- */
+
+        .ClassDivMenuOS{
+            position: absolute;
+            top: 10%;
+            left: 0;
+            width: 5%;
+            font-size: 17px;
+            font-family: sans-serif;
+            background-color: #282c45;
+            background-image: linear-gradient(45deg, #cfc0db, #ffffff, #cfc0db );
+            /*border-top-left-radius : 10px;*/
+            border-top-right-radius : 10px;
+            border-bottom-right-radius : 10px;
+            /*border-bottom-left-radius : 10px;*/
+            display: block;
+            /*border: solid 1px #000000;*/
+            box-sizing: border-box;
+
+            -webkit-box-shadow: -9px 9px 20px rgba(1, 1, 1, 0.57);
+            -moz-box-shadow: -9px 9px 20px rgba(1, 1, 1, 0.57);
+            box-shadow: -9px 9px 20px rgba(1, 1, 1, 0.57);  
+
+        }
+
+        .Note {
+          font-family: oiTextRegular, sans-serif;
+          background-color: #e0e0a2;
+          
+          color: #222222;
+          display: block;
+          font-size: 1rem; /*16px*/
+          text-align:left;
+          width: 100%;
+          text-decoration: none;
+          border: solid 1px #dbdbdb;
+          cursor: pointer;
+          outline: 0;
+          margin: 0px;
+          padding: 1px;
+          box-sizing: border-box;
+          font-style: normal;
+          -webkit-box-shadow: 1px 1px 10px rgba(1, 1, 1, 0.47);
+          -moz-box-shadow: 1px 1px 10px rgba(1, 1, 1, 0.47);
+          box-shadow: 1px 1px 10px rgba(1, 1, 1, 0.47);
+          
+      }

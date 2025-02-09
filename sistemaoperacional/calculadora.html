@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <title>Calculdora</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="css/calculadora.css" />
+</head>
+
+<body>
+
+	<div class="divCalculadora">
+        <input type="number" class="impCalc" id="impCalcNum" name="impCalcNum" maxlength="15" value="0"/><br/>
+        <div class="justificado">
+          <div class="vertical">
+            <div><a id="btLinkIniciar" class="btCalculadora" onClick="funCalcCE()">CE</a></div>
+            <div><a id="btLinkIniciar" class="btCalculadora" onClick="funConctNum('7')">7</a></div>
+            <div><a id="btLinkIniciar" class="btCalculadora" onClick="funConctNum('4')">4</a></div>
+            <div><a id="btLinkIniciar" class="btCalculadora" onClick="funConctNum('1')">1</a></div>
+            <div><a id="btLinkIniciar" class="btCalculadora" onClick="funConctPonto()">,</a></div>
+          </div>
+          
+          <div class="vertical">
+            <div><a id="btLinkIniciar" class="btCalculadora" onClick="funCalcRaiz()">R</a></div>
+            <div><a id="btLinkIniciar" class="btCalculadora" onClick="funConctNum('8')">8</a></div>
+            <div><a id="btLinkIniciar" class="btCalculadora" onClick="funConctNum('5')">5</a></div>
+            <div><a id="btLinkIniciar" class="btCalculadora" onClick="funConctNum('2')">2</a></div>
+            <div><a id="btLinkIniciar" class="btCalculadora" onClick="funConctNum('0')">0</a></div>
+          </div>
+
+          <div class="vertical">
+            <div><a id="btLinkIniciar" class="btCalculadora" onClick="funCalcDel()">&#60</a></div>
+            <div><a id="btLinkIniciar" class="btCalculadora" onClick="funConctNum('9')">9</a></div>  
+            <div><a id="btLinkIniciar" class="btCalculadora" onClick="funConctNum('6')">6</a></div>
+            <div><a id="btLinkIniciar" class="btCalculadora" onClick="funConctNum('3')">3</a></div>
+            <div><a id="btLinkIniciar" class="btCalculadora" onClick="funCalcPorcento()">%</a></div>
+          </div>
+
+          <div class="vertical">
+            <div><a id="btLinkIniciar" class="btCalculadora" onClick="funCalcSinal('+')">+</a></div>
+            <div><a id="btLinkIniciar" class="btCalculadora" onClick="funCalcSinal('-')">-</a></div>
+            <div><a id="btLinkIniciar" class="btCalculadora" onClick="funCalcSinal('*')">x</a></div>
+            <div><a id="btLinkIniciar" class="btCalculadora" onClick="funCalcSinal('/')">/</a></div>
+            <div><a id="btLinkIniciar" class="btCalculadora" onClick="funCalcIgual()">=</a></div>
+          </div>
+
+        </div>
+        <input type="text" class="impCalc" id="impCalcLog" name="impCalcLog" maxlength="15"/><br/>
+	</div>
+<script type="text/javascript" src="js/camculadora.js"></script>
+
+</body>
+</html>
