@@ -57,6 +57,11 @@
 				<img src="img/ico_www.png" alt="Internet" width="50px" height="50px"/>
 			</div>
 		</a>
+		<a href="javascript:abrirJanela(IdJanelaCadastro)" class="icone">
+			<div class="btIcon">
+				<img src="img/ico_cadastro.png" alt="Gerador Dados" width="50px" height="50px"/>
+			</div>
+		</a>
 		<a href="javascript:abrirJanela(IdJanelaDesenho)" class="icone">
 			<div class="btIcon">
 				<img src="img/ico_desenho.png" alt="Desenho" width="50px" height="50px"/>
@@ -255,7 +260,7 @@
 		
 		<div id="IdJanelaDesenho" class="classDivJanelaNaveg">
 			<div class="atDivNavegTop">
-				Desenho
+				Desenho !
 				<a href='javascript:fecharJanela(IdJanelaDesenho)' class="icone"><div class="atDivNavegBola corvermelho"></div></a>
 				<a href='javascript:fecharJanela(IdJanelaDesenho)' class="icone"><div class="atDivNavegBola coramarelo"></div></a>
 				<a href='javascript:moveJanelaTop(IdJanelaDesenho)' class="icone"><div class="atDivNavegBola corverde"></div></a>
@@ -270,6 +275,35 @@
 					<button id="clearButton">Limpar</button>
 				</div>
 				<canvas id="drawingCanvas" width="800" height="500"></canvas>
+			</div>
+
+		</div>
+
+		<div id="IdJanelaCadastro" class="classDivJanelaNaveg">
+			<div class="atDivNavegTop">
+				Gerador de dados para formulario
+				<a href='javascript:fecharJanela(IdJanelaCadastro)' class="icone"><div class="atDivNavegBola corvermelho"></div></a>
+				<a href='javascript:fecharJanela(IdJanelaCadastro)' class="icone"><div class="atDivNavegBola coramarelo"></div></a>
+				<a href='javascript:moveJanelaTop(IdJanelaCadastro)' class="icone"><div class="atDivNavegBola corverde"></div></a>
+			</div>
+	
+			<div class="atDivCodigo">
+				<div>
+					Gerador de dados para teste de formulario.				
+					<p>
+						Nome : <span id="nome"></span><br/>
+						CPF : <span id="cpf"></span><br/>
+						e-mail : <span id="email"></span><br/>
+						telefone : <span id="telefone"></span><br/>
+						celular : <span id="celular"></span><br/>
+						Endereço : <span id="endereco"></span><br/>
+						Numero : <span id="numero"></span><br/>
+						bairro : <span id="bairro"></span><br/>
+						estado : <span id="estado"></span><br/>
+						cidade : <span id="cidade"></span><br/>
+					</p>
+					<button class="btConvetTexto" onclick="gerarDados()">Gerar dados</button>
+				</div>
 			</div>
 
 		</div>
@@ -305,5 +339,7 @@
 <script type="text/javascript" src="js/conversordetexto.js"></script>
 <script type="text/javascript" src="js/converteunidade.js"></script>
 <script type="text/javascript" src="js/desenho.js"></script>
+<script type="text/javascript" src="js/dadosformulario.js"></script>
+
 </body>
 </html>
