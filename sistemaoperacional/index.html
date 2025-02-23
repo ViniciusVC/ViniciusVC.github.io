@@ -6,8 +6,10 @@
   <meta name="keywords" content="Tools, simulator, operational, system, OS, game, ferramentas, javascript">
   <link rel="canonical" href="http://vvcestudio.com.br/pt/play/sistemaoperacional/">
   <link rel="alternate" hreflang="en-US" href="http://vvcestudio.com.br/en/play/sistemaoperacional/">
+
   <meta charset="utf-8">
   <link rel="stylesheet" type="text/css" href="css/styles.css" />
+  <link rel="stylesheet" type="text/css" href="css/foco.css" />
   <link rel="stylesheet" type="text/css" href="css/calculadora.css" />
   <link rel="stylesheet" type="text/css" href="css/relogio.css" />
   <link rel="stylesheet" type="text/css" href="css/conversordetexto.css" />
@@ -56,6 +58,11 @@
 				<img src="img/ico_calculadora.png" alt="calculadora" width="50px" height="50px"/>
 			</div>
 		</a>
+		<a href="javascript:abrirJanela(IdJanelaFoco)" class="icone">
+			<div class="btIcon">
+				<img src="img/ico_foco.png" alt="APP-Foco" width="50px" height="50px"/>
+			</div>
+		</a>
 		<a href="javascript:abrirJanela(IdJanelaWWW)" class="icone">
 			<div class="btIcon">
 				<img src="img/ico_www.png" alt="Internet" width="50px" height="50px"/>
@@ -73,6 +80,49 @@
 		</a>	
 	</div>
 
+
+	<div id="IdJanelaFoco" class="classDivJanelaNaveg">
+		<div class="atDivNavegTop">
+			APP-foco
+			<a href='javascript:fecharJanela(IdJanelaFoco)' class="icone"><div class="atDivNavegBola corvermelho"></div></a>
+			<a href='javascript:fecharJanela(IdJanelaFoco)' class="icone"><div class="atDivNavegBola coramarelo"></div></a>
+			<a href='javascript:MaxJanela(IdJanelaFoco)' class="icone"><div class="atDivNavegBola corverde"></div></a>
+		</div>
+		<div class="janelaFoco">
+			<h1 class="h1foco">Lembrete para manter o foco</h1>
+			<div id="timer" class="timerFoco">03:00</div>
+			<button id="startButton" class="buttonFoco">Iniciar Contagem</button>
+			<button id="stopButton" class="buttonFoco">Parar Contagem</button>
+			<audio id="alarmSound" src="sons/beep.wav"></audio>
+			<p>Emite um beep a cada 3min para lembra-lo de se concentrar em alguma tarefa, como trabalo ou estudo.</p>
+			<script type="text/javascript" src="js/foco.js"></script>
+		  </div>
+	</div>
+	
+	<div id="IdJanelaRelogio" class="classDivJanelaNaveg">
+		<div class="atDivNavegTop">
+			Relogio
+			<a href='javascript:fecharJanela(IdJanelaRelogio)' class="icone"><div class="atDivNavegBola corvermelho"></div></a>
+			<a href='javascript:fecharJanela(IdJanelaRelogio)' class="icone"><div class="atDivNavegBola coramarelo"></div></a>
+			<a href='javascript:moveJanelaTop(IdJanelaRelogio)' class="icone"><div class="atDivNavegBola corverde"></div></a>
+		</div>
+
+				<div id="btLInitRelogAnalo">
+				  Carregando Relogio Analogico...
+				</div>
+				<div id="relogioAnalogico" class="relogioFundo">
+				  <div class="hora12">12</div>
+				  <div class="hora6">6</div>
+				  <div class="hora9">9</div>
+				  <div class="hora3">3</div>
+				  <div id="analogicHours" class="ponteiros hours"></div> 
+				  <div id="analogicMinutes"  class="ponteiros minutes"></div> 
+				  <div id="analogicSeconds" class="ponteiros seconds"></div> 
+				  <div class="parafuso"></div> 
+				</div>
+
+	</div>
+
 	<div id="IdJanelaWWW" class="classDivJanelaNaveg">
 		<div class="atDivNavegTop">
 			Internet
@@ -83,17 +133,7 @@
 		<iframe src="https://vvcestudio.com.br/pt" width="100%" height="480" title="internet"></iframe>
 	</div>
 
-	<div id="IdJanelaNote" class="classDivJanelaNaveg">
-		<div class="atDivNavegTop">
-			Bloco de notas
-			<a href='javascript:fecharJanela(IdJanelaNote)' class="icone"><div class="atDivNavegBola corvermelho"></div></a>
-			<a href='javascript:fecharJanela(IdJanelaNote)' class="icone"><div class="atDivNavegBola coramarelo"></div></a>
-			<a href='javascript:MaxJanela(IdJanelaNote)' class="icone"><div class="atDivNavegBola corverde"></div></a>
-		</div>
-			<textarea class="Note" id="textareaNote" name="textareaNote" rows="20" cols="100"></textarea><br />
-	</div>
 
-	
 	<div id="IdJanelaCalculadora" class="classDivJanelaNaveg">
 		<div class="atDivNavegTop">
 			Calculadora
@@ -142,7 +182,8 @@
 	</div>
 
 
-		<div id="IdJanelaConversorDeTextos" class="classDivJanelaNaveg">
+
+	<div id="IdJanelaConversorDeTextos" class="classDivJanelaNaveg">
 			<div class="atDivNavegTop">
 				Conversor de Textos
 				<a href='javascript:fecharJanela(IdJanelaConversorDeTextos)' class="icone"><div class="atDivNavegBola corvermelho"></div></a>
@@ -192,10 +233,10 @@
 				</div>
 
 			</div>
-		</div>
+	</div>
 
 
-		<div id="IdJanelaConversorDeUnidade" class="classDivJanelaNaveg">
+	<div id="IdJanelaConversorDeUnidade" class="classDivJanelaNaveg">
 			<div class="atDivNavegTop">
 				Conversor de Unidade
 				<a href='javascript:fecharJanela(IdJanelaConversorDeUnidade)' class="icone"><div class="atDivNavegBola corvermelho"></div></a>
@@ -235,34 +276,19 @@
 					<input type="number" id="impMedidaPos" name="impMedidaPos" maxlength="20"/><br/>
 				  </div>
 			</div>
-		</div>
-
-
-		<div id="IdJanelaRelogio" class="classDivJanelaNaveg">
-			<div class="atDivNavegTop">
-				Relogio
-				<a href='javascript:fecharJanela(IdJanelaRelogio)' class="icone"><div class="atDivNavegBola corvermelho"></div></a>
-				<a href='javascript:fecharJanela(IdJanelaRelogio)' class="icone"><div class="atDivNavegBola coramarelo"></div></a>
-				<a href='javascript:moveJanelaTop(IdJanelaRelogio)' class="icone"><div class="atDivNavegBola corverde"></div></a>
-			</div>
+	</div>
 	
-					<div id="btLInitRelogAnalo">
-					  Carregando Relogio Analogico...
-					</div>
-					<div id="relogioAnalogico" class="relogioFundo">
-					  <div class="hora12">12</div>
-					  <div class="hora6">6</div>
-					  <div class="hora9">9</div>
-					  <div class="hora3">3</div>
-					  <div id="analogicHours" class="ponteiros hours"></div> 
-					  <div id="analogicMinutes"  class="ponteiros minutes"></div> 
-					  <div id="analogicSeconds" class="ponteiros seconds"></div> 
-					  <div class="parafuso"></div> 
-					</div>
-
+	<div id="IdJanelaNote" class="classDivJanelaNaveg">
+		<div class="atDivNavegTop">
+			Bloco de notas
+			<a href='javascript:fecharJanela(IdJanelaNote)' class="icone"><div class="atDivNavegBola corvermelho"></div></a>
+			<a href='javascript:fecharJanela(IdJanelaNote)' class="icone"><div class="atDivNavegBola coramarelo"></div></a>
+			<a href='javascript:MaxJanela(IdJanelaNote)' class="icone"><div class="atDivNavegBola corverde"></div></a>
 		</div>
-		
-		<div id="IdJanelaDesenho" class="classDivJanelaNaveg">
+			<textarea class="Note" id="textareaNote" name="textareaNote" rows="20" cols="100"></textarea><br />
+	</div>
+
+	<div id="IdJanelaDesenho" class="classDivJanelaNaveg">
 			<div class="atDivNavegTop">
 				Desenho !
 				<a href='javascript:fecharJanela(IdJanelaDesenho)' class="icone"><div class="atDivNavegBola corvermelho"></div></a>
@@ -338,6 +364,7 @@
 </div>
 
 <script type="text/javascript" src="js/os.js"></script>
+<script type="text/javascript" src="js/foco.js"></script>
 <script type="text/javascript" src="js/camculadora.js"></script>
 <script type="text/javascript" src="js/relogio.js"></script>
 <script type="text/javascript" src="js/conversordetexto.js"></script>

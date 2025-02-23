@@ -1,5 +1,5 @@
 
-var spanAppAtual, DivIntro, IdJanelaConversorDeTextos, IdJanelaConversorDeUnidade, IdJanelaRelogio,IdJanelaCalculadora, IdJanelaNote, IdJanelaWWW, IdJanelaDesenho;
+var spanAppAtual, DivIntro, IdJanelaFoco, IdJanelaConversorDeTextos, IdJanelaConversorDeUnidade, IdJanelaRelogio,IdJanelaCalculadora, IdJanelaNote, IdJanelaWWW, IdJanelaCadastro, IdJanelaDesenho;
 	
 	function init(){
 		console.log("iniciou Sistema Operacional.");
@@ -7,29 +7,35 @@ var spanAppAtual, DivIntro, IdJanelaConversorDeTextos, IdJanelaConversorDeUnidad
 		spanAppAtual = document.getElementById("spanAppAtual");
 
 		IdJanelaCalculadora = document.getElementById("IdJanelaCalculadora");
+		IdJanelaFoco = document.getElementById("IdJanelaFoco");
 		IdJanelaConversorDeTextos = document.getElementById("IdJanelaConversorDeTextos");
 		IdJanelaConversorDeUnidade = document.getElementById("IdJanelaConversorDeUnidade");
 		IdJanelaRelogio = document.getElementById("IdJanelaRelogio");
 		IdJanelaNote = document.getElementById("IdJanelaNote");
 		IdJanelaWWW = document.getElementById("IdJanelaWWW");
+		IdJanelaCadastro = document.getElementById("IdJanelaCadastro");
 		IdJanelaDesenho = document.getElementById("IdJanelaDesenho");
 		
 		DivIntro.style.display = "none"; //Esconder Janela de Informações.
 		
 		fecharJanela(IdJanelaCalculadora);
+		fecharJanela(IdJanelaFoco);
 		fecharJanela(IdJanelaConversorDeTextos);
 		fecharJanela(IdJanelaConversorDeUnidade);
 		fecharJanela(IdJanelaRelogio);
 		fecharJanela(IdJanelaNote);
 		fecharJanela(IdJanelaWWW);
+		fecharJanela(IdJanelaCadastro);
 		fecharJanela(IdJanelaDesenho);
 
 		Dragable(IdJanelaCalculadora); //Mover janela.
+		Dragable(IdJanelaFoco); //Mover janela.
 		Dragable(IdJanelaConversorDeTextos); //Mover janela.
 		Dragable(IdJanelaConversorDeUnidade); //Mover janela.
 		Dragable(IdJanelaRelogio); //Mover janela.
 		Dragable(IdJanelaNote); //Mover janela.
 		Dragable(IdJanelaWWW); //Mover janela.
+		Dragable(IdJanelaCadastro); //Mover janela.
 		//Dragable(IdJanelaDesenho); //Mover janela.
 		
 		//animate();
@@ -39,6 +45,8 @@ var spanAppAtual, DivIntro, IdJanelaConversorDeTextos, IdJanelaConversorDeUnidad
 		let tempAPPatual = "";
 		if (IdJanelaCalculadora==el){
 			tempAPPatual = "Calculadora";
+		} else if (IdJanelaFoco==el){
+			tempAPPatual = "APP-Foco";
 		} else if (IdJanelaConversorDeTextos==el){
 			tempAPPatual = "Conversor de Textos";
 		} else if (IdJanelaConversorDeUnidade==el){
@@ -49,6 +57,8 @@ var spanAppAtual, DivIntro, IdJanelaConversorDeTextos, IdJanelaConversorDeUnidad
 			tempAPPatual = "Notas";
 		} else if (IdJanelaWWW==el){
 			tempAPPatual = "Internet";
+		} else if (IdJanelaCadastro==el){
+			tempAPPatual = "Gerador de Dados";
 		} else if (IdJanelaDesenho==el){
 			tempAPPatual = "Desenho";
 		}
