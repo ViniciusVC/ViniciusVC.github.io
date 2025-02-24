@@ -125,7 +125,8 @@ body {
         position: absolute;
         height: 100%;
         top: 0px;
-        background-image: url("https://images.sftcdn.net/images/t_app-cover-l,f_auto/p/00401d78-9b29-11e6-81ff-00163ed833e7/3942345496/windows-10-login-background-changer-screenshot.jpg");
+        background-color: #282c45;
+        background-image: url("../img/login.jpg");
         background-repeat: no-repeat;
         background-size: 100% 100%;
     }
