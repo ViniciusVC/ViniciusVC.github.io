@@ -1,0 +1,31 @@
+.classTabNPS {
+  margin: 5px;
+  /*padding: 5px;*/
+  /*background-color: hsl(0, 0%, 96%);*/
+  border: 0px;
+  width: 100%;
+}
+
+.classTabNPSverde {
+  margin: 5px;
+  padding: 5px;
+  background-color: green;
+  color: white;
+  border: 0px;
+}
+
+.classTabNPSamarelo {
+  margin: 5px;
+  /*padding: 5px;*/
+  background-color: orange;
+  color: white;
+  border: 0px;
+}
+
+.classTabNPSvermelho {
+  margin: 5px;
+  /*padding: 5px;*/
+  background-color: red;
+  color: white;
+  border: 0px;
+}

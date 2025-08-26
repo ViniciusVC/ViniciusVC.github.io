@@ -14,6 +14,7 @@
   <link rel="stylesheet" type="text/css" href="css/relogio.css" />
   <link rel="stylesheet" type="text/css" href="css/conversordetexto.css" />
   <link rel="stylesheet" type="text/css" href="css/converteunidade.css" />
+  <link rel="stylesheet" type="text/css" href="css/nps.css" />
   <link rel="stylesheet" type="text/css" href="css/desenho.css" />
 </head>
 
@@ -45,7 +46,12 @@
 		</a>
 		<a href="javascript:abrirJanela(IdJanelaConversorDeUnidade)" class="icone">
 			<div class="btIcon">
-				<img src="img/ico_medida.png" alt="Conversor de medida" width="50px"/>
+				<img src="img/ico_medida.png" alt="Calculadora de NPS" width="50px"/>
+			</div>
+		</a>
+		<a href="javascript:abrirJanela(IdJanelaNPS)" class="icone">
+			<div class="btIcon">
+				<img src="img/ico_nps.png" alt="Conversor de medida" width="50px"/>
 			</div>
 		</a>
 		<a href="javascript:abrirJanela(IdJanelaRelogio)" class="icone">
@@ -278,6 +284,95 @@
 			</div>
 	</div>
 	
+	<div id="IdJanelaNPS" class="classDivJanelaNaveg">
+			<div class="atDivNavegTop">
+				Calculadora de NPS
+				<a href='javascript:fecharJanela(IdJanelaNPS)' class="icone"><div class="atDivNavegBola corvermelho"></div></a>
+				<a href='javascript:fecharJanela(IdJanelaNPS)' class="icone"><div class="atDivNavegBola coramarelo"></div></a>
+				<a href='javascript:MaxJanela(IdJanelaNPS)' class="icone"><div class="atDivNavegBola corverde"></div></a>
+			</div>
+			<div class="atDivCodigo">				
+				<div>
+					<span>Digite as quantidades de notas recebidas</span>
+					<table cellpadding="5" cellspacing="0" class="classTabNPS">
+					<tr class="classTabNPSverde">
+						<td>Quantidade de notas 10</td>
+						<td><input type="number" id="impNPSnota10" name="impMedidaPre" autofocus maxlength="8" value="0"/></td>
+					</tr>
+					<tr class="classTabNPSverde">
+						<td>Quantidade de notas 9</td>
+						<td><input type="number" id="impNPSnota9" name="impMedidaPre" maxlength="8" value="0"/></td>
+					</tr>
+					<tr class="classTabNPSamarelo">
+						<td>Quantidade de notas 8</td>
+						<td><input type="number" id="impNPSnota8" name="impMedidaPre" maxlength="8" value="0"/></td>
+					</tr>
+					<tr class="classTabNPSamarelo">
+						<td>Quantidade de notas 7</td>
+						<td><input type="number" id="impNPSnota7" name="impMedidaPre" maxlength="8" value="0"/></td>
+					</tr>
+					<tr class="classTabNPSvermelho">
+						<td>Quantidade de notas 6</td>
+						<td><input type="number" id="impNPSnota6" name="impMedidaPre" maxlength="8" value="0"/></td>
+					</tr>
+					<tr class="classTabNPSvermelho">
+						<td>Quantidade de notas 5</td>
+						<td><input type="number" id="impNPSnota5" name="impMedidaPre" maxlength="8" value="0"/></td>
+					</tr>
+					<tr class="classTabNPSvermelho">
+						<td>Quantidade de notas 4</td>
+						<td><input type="number" id="impNPSnota4" name="impMedidaPre" maxlength="8" value="0"/></td>
+					</tr>
+					<tr class="classTabNPSvermelho">
+						<td>Quantidade de notas 3</td>
+						<td><input type="number" id="impNPSnota3" name="impMedidaPre" maxlength="8" value="0"/></td>
+					</tr>
+					<tr class="classTabNPSvermelho">
+						<td>Quantidade de notas 2</td>
+						<td><input type="number" id="impNPSnota2" name="impMedidaPre" maxlength="8" value="0"/></td>
+					</tr>
+					<tr class="classTabNPSvermelho">
+						<td>Quantidade de notas 1</td>
+						<td><input type="number" id="impNPSnota1" name="impMedidaPre" maxlength="8" value="0"/></td>
+					</tr>
+					<tr class="classTabNPSvermelho">
+						<td>Quantidade de notas 0</td>
+						<td><input type="number" id="impNPSnota0" name="impMedidaPre" maxlength="8" value="0"/></td>
+					</tr>
+					</table>
+
+					<table cellpadding="5" cellspacing="0" class="classTabNPS">
+					<tr class="classTabNPSverde">
+						<td>Clientes Promotores</td>
+						<td><span id="spanNPSPromot"></span></td>
+						<td><span id="spanNPSPromotPercent"></span></td>
+					</tr>
+					<tr class="classTabNPSamarelo">
+						<td>Clientes Neutros</td>
+						<td><span id="spanNPSNeutro"></span></td>
+						<td><span id="spanNPSNeutroPercent"></span></td>
+					</tr>
+					<tr class="classTabNPSvermelho">
+						<td>Clientes Detratores</td>
+						<td><span id="spanNPSDetract"></span></td>
+						<td><span id="spanNPSDetractPercent"></span></td>
+					</tr>
+					</table>
+
+					<table cellpadding="5" cellspacing="0" class="classTabNPS">
+					<tr>
+						<td>Nota de NPS</td>
+						<td><span id="spanNPSnota"></span></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><button class="btConvetTexto" onclick="calcularNPS()">Calcular NPS</button></td>
+					</tr>
+					</table>
+					
+				  </div>
+			</div>
+	</div>
 	<div id="IdJanelaNote" class="classDivJanelaNaveg">
 		<div class="atDivNavegTop">
 			Bloco de notas
@@ -372,6 +467,7 @@
 <script type="text/javascript" src="js/relogio.js"></script>
 <script type="text/javascript" src="js/conversordetexto.js"></script>
 <script type="text/javascript" src="js/converteunidade.js"></script>
+<script type="text/javascript" src="js/nps.js"></script>
 <script type="text/javascript" src="js/desenho.js"></script>
 <script type="text/javascript" src="js/dadosformulario.js"></script>
 
