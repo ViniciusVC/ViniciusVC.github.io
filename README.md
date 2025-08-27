@@ -43,7 +43,9 @@ https://github.com/ViniciusVC/ViniciusVC.github.io
 │   https://vvcestudio.com.br/pt/play/starintruder
 │
 ├── 📂 /straymariner
-   (Game piratinha 2D - JS)
-    https://vvcestudio.com.br/pt/play/straymariner
+│   (Game piratinha 2D - JS)
+│   https://vvcestudio.com.br/pt/play/straymariner
+├── 📂 /pointerlocktest
+    (Teste Game 3D - JS)
 
 ```

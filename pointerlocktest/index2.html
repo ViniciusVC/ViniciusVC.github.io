@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jogo 3D - Pointer Lock</title>
+  <meta name="description" content="Three.js PointerLockControls Exemplo">
+  <link type="text/css" rel="stylesheet" href="estilo.css" />
+      <script type="importmap">
+            {
+                "imports": {
+                    "three": "../assetsv5/js/three.module.js"
+                }
+            }
+    </script>
+</head>
+<body>
+  <div id="overlay">
+    <div class="icon-button" id="lockBtn" title="Clique para capturar o mouse">
+      <div class="mouse-icon">🖱️</div>
+    </div>
+    <div class="hint">
+      Clique no botão para capturar o mouse.<br/>
+      Use <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> para andar • <kbd>Esc</kbd> para sair
+    </div>
+  </div>
+  <div id="stats"></div>
+  <script type="module">
+            import * as THREE from 'three'
+    //import * as THREE from "./assetsv5/js/three.module.js";
+    import { PointerLockControls } from '../assetsv5/js/PointerLockControls.js'
+
+    // --- Básico da cena ---
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x0f1320);
+
+    const camera = new THREE.PerspectiveCamera(75, innerWidth/innerHeight, 0.1, 1000);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(innerWidth, innerHeight);
+    renderer.shadowMap.enabled = true;
+    document.body.appendChild(renderer.domElement);
+
+    // Luzes
+    const hemi = new THREE.HemisphereLight(0xbfdfff, 0x202020, 0.75);
+    scene.add(hemi);
+
+    const dir = new THREE.DirectionalLight(0xffffff, 0.9);
+    dir.position.set(10, 20, 10);
+    dir.castShadow = true;
+    dir.shadow.mapSize.set(2048, 2048);
+    scene.add(dir);
+
+    // Chão
+    const groundGeo = new THREE.PlaneGeometry(500, 500);
+    const groundMat = new THREE.MeshPhongMaterial({ color: 0x2a2f3a });
+    const ground = new THREE.Mesh(groundGeo, groundMat);
+    ground.rotation.x = -Math.PI / 2;
+    ground.receiveShadow = true;
+    scene.add(ground);
+
+    // Objetos de referência
+    const boxGeo = new THREE.BoxGeometry(2, 8, 2);
+    const cols = [0x4cc9f0, 0x4895ef, 0x4361ee, 0x3f37c9, 0x560bad];
+    for (let i = 0; i < 60; i++) {
+      const mat = new THREE.MeshStandardMaterial({ color: cols[i % cols.length], roughness: .6, metalness: .15 });
+      const box = new THREE.Mesh(boxGeo, mat);
+      box.position.set((Math.random()-0.5)*120, 1, (Math.random()-0.5)*120);
+      box.castShadow = true;
+      box.receiveShadow = true;
+      scene.add(box);
+    }
+
+    // Grade para orientação
+    const grid = new THREE.GridHelper(200, 40, 0x335, 0x223);
+    grid.position.y = 0.01;
+    scene.add(grid);
+
+    // --- Pointer Lock + controles de câmera (FPS) ---
+    const controls = new PointerLockControls(camera, renderer.domElement);
+    scene.add(controls.getObject()); // o objeto "jogador" que carrega a câmera
+
+    // posição inicial
+    controls.getObject().position.set(0, 2, 8);
+
+    // Overlay / botão para capturar mouse
+    const overlay = document.getElementById('overlay');
+    const lockBtn = document.getElementById('lockBtn');
+
+    lockBtn.addEventListener('click', () => {
+      console.log('Solicitando pointer lock...');
+      controls.lock(); // solicita pointer lock (o navegador pedirá permissão)
+    });
+
+    controls.addEventListener('lock', () => overlay.classList.add('hidden'));
+    controls.addEventListener('unlock', () => overlay.classList.remove('hidden'));
+
+    // --- Movimento WASD com aceleração simples ---
+    const keys = { w:false, a:false, s:false, d:false };
+    const velocity = new THREE.Vector3();
+    const direction = new THREE.Vector3();
+
+    const onKey = (e, down) => {
+      switch (e.code) {
+        case 'KeyW': keys.w = down; break;
+        case 'KeyA': keys.a = down; break;
+        case 'KeyS': keys.s = down; break;
+        case 'KeyD': keys.d = down; break;
+      }
+    };
+
+    addEventListener('keydown', e => onKey(e, true));
+    addEventListener('keyup',   e => onKey(e, false));
+
+    // Evita scroll com espaço/teclas quando travado
+    addEventListener('keydown', e => {
+      if (controls.isLocked && ['Space','ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(e.code)) {
+        e.preventDefault();
+      }
+    }, { passive:false });
+
+    // --- Loop ---
+    const clock = new THREE.Clock();
+    const statsEl = document.getElementById('stats');
+
+    function animate() {
+      requestAnimationFrame(animate);
+      const delta = Math.min(clock.getDelta(), 0.05);
+
+      // Física simples de movimento
+      const speed = 50.0;      // velocidade "máxima"
+      const damping = 10.0;    // amortecimento
+
+      velocity.x -= velocity.x * damping * delta;
+      velocity.z -= velocity.z * damping * delta;
+
+      direction.set(0,0,0);
+      if (keys.w) direction.z -= 1;
+      if (keys.s) direction.z += 1;
+      if (keys.a) direction.x -= 1;
+      if (keys.d) direction.x += 1;
+      direction.normalize();
+
+      if (controls.isLocked) {
+        if (direction.lengthSq() > 0) {
+          // aplica na base da orientação atual
+          const forward = new THREE.Vector3();
+          controls.getDirection(forward); // direção olhando (unitária)
+          forward.y = 0; forward.normalize();
+
+          const right = new THREE.Vector3().crossVectors(forward, new THREE.Vector3(0,1,0)).negate();
+
+          velocity.addScaledVector(forward,  speed * delta * -direction.z);
+          velocity.addScaledVector(right,    speed * delta *  direction.x);
+        }
+
+        controls.getObject().position.addScaledVector(velocity, delta);
+        // mantém “pés” acima do chão
+        controls.getObject().position.y = 2;
+      }
+
+      renderer.render(scene, camera);
+
+      // debug simples
+      statsEl.textContent = `FPS: ${(1/delta|0)}  |  Pos: ${controls.getObject().position.x.toFixed(1)}, ${controls.getObject().position.y.toFixed(1)}, ${controls.getObject().position.z.toFixed(1)}`;
+    }
+    animate();
+
+    // Resize
+    addEventListener('resize', () => {
+      camera.aspect = innerWidth / innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(innerWidth, innerHeight);
+    });
+  </script>
+</body>
+</html>
